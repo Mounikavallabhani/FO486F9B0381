@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/login_details_view_id"
+        android:visibility="invisible"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/login_details_RL1_id"
+        android:layout_below="@+id/login_details_view_id"
+        android:background="@drawable/layout_round_corner"
+        >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/login_details_cross_IV_id"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_cross"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/login_details_help_IV_id"
+            android:src="@drawable/ic_help"
+            android:padding="8dp"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_TV1_id"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="You need a dnews\naccount to Continue"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            />
+
+        <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/login_details_RKL_id"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/login_details_TV1_id"
+            app:corner_radius="2dp"
+            android:background="@color/blue"
+            >
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:text="Sign Up with Phone or Email"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                />
+
+        </com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_RL2_id"
+            android:layout_below="@+id/login_details_RKL_id"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_details_RL2_TV2_id"
+                android:text="OR"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/login_details_RL2_TV1_id"
+                android:background="@color/light_gray"
+                android:layout_toLeftOf="@+id/login_details_RL2_TV2_id"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/login_details_RL2_TV3_id"
+                android:background="@color/light_gray"
+                android:layout_toRightOf="@+id/login_details_RL2_TV2_id"
+                android:layout_centerVertical="true"
+                />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_RL3_id"
+            android:layout_below="@+id/login_details_RL2_id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp"
+            >
+
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_scrollview_id"
+            android:layout_centerHorizontal="true"
+            android:scrollbars="none"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/login_details_fb_iV_id"
+                    android:src="@drawable/ic_facebook"
+                    android:padding="2dp"
+                    />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/login_details_goggle_iV_id"
+                    android:src="@drawable/ic_goggle"
+                    android:layout_toRightOf="@+id/login_details_fb_iV_id"
+                    android:layout_marginLeft="10dp"
+                    android:padding="2dp"
+                    />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/login_details_twitter_iV_id"
+                    android:src="@drawable/ic_twitter"
+                    android:layout_toRightOf="@+id/login_details_goggle_iV_id"
+                    android:layout_marginLeft="10dp"
+                    android:padding="2dp"
+                    />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/login_details_instagram_iV_id"
+                    android:src="@drawable/ic_facebook"
+                    android:layout_toRightOf="@+id/login_details_twitter_iV_id"
+                    android:layout_marginLeft="10dp"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    />
+
+
+            </RelativeLayout>
+
+
+        </HorizontalScrollView>
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/login_details_next_scroll_IV_id"
+            android:src="@drawable/ic_next_gray"
+            android:layout_toRightOf="@+id/login_details_scrollview_id"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_TV2_id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="15dp"
+            android:layout_below="@+id/login_details_RL3_id"
+            android:text="By signing up, you confirm that you agree to our \n Terms of Use and have read and understood \n our Privacy Policy."
+            android:textAlignment="center"
+            />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/login_details_RL4_id"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/up_line_border"
+            >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/login_details_RL3_TV1_id"
+                    android:text="Already have an account?"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/login_details_RL3_TV2_id"
+                    android:text=" Login."
+                    android:textColor="@color/blue"
+                    android:layout_toRightOf="@+id/login_details_RL3_TV1_id"
+                    />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

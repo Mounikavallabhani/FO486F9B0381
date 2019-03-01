@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/discover_parent_RL_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TopNews.Discover">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/discover_RL1_id">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:id="@+id/discover_LL_id"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WEDNESDAY, NOVEMBER 29"
+                        android:id="@+id/dicover_date_id"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="12dp"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/discover_child_RL_1"
+                        android:layout_below="@+id/dicover_date_id"
+                        >
+
+                        <TextView
+                            android:id="@+id/topnews_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginLeft="20dp"
+                            android:text="Top News"
+                            android:textColor="@color/black"
+                            android:textSize="26dp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/circle_image"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/circle_background"
+                            android:src="@drawable/ic_profile_gray" />
+
+
+                    </RelativeLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/RV_id"
+                            android:clipToPadding="false"
+                            android:layout_below="@+id/discover_child_RL_1"
+                            android:layout_above="@+id/startup_id"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                        </android.support.v7.widget.RecyclerView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startup_id"
+                            android:text="STARTUPS"
+                            android:textColor="@color/blue"
+                            android:layout_marginLeft="20dp"
+                            android:layout_above="@+id/title_id"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            />
+                        
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/title_id"
+                            android:text="Top startups that are changing the way we travel"
+                            android:textSize="22dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:paddingBottom="8dp"
+                            android:layout_alignParentBottom="true"
+                            />
+
+
+                </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/discover_RL2_id"
+                android:layout_below="@id/discover_LL_id">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/discover_RL3_id"
+                    android:background="@drawable/up_line_border"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/discover_RL2_TV_id"
+                        android:text="Recent News"
+                        android:textSize="22dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:paddingTop="8dp"
+                        android:layout_alignParentBottom="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/discover_RL2_TV1_id"
+                        android:text="See All"
+                        android:textSize="16dp"
+                        android:textColor="@color/blue"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="8dp"
+                        />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/discover_RL2_RV2_id"
+                    android:layout_below="@+id/discover_RL3_id"
+                    android:paddingTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    >
+
+
+                </android.support.v7.widget.RecyclerView>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</RelativeLayout>
