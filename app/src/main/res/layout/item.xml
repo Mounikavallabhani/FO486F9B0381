@@ -133,7 +133,6 @@
                 android:id="@+id/item_inner_RL_IV_id"
                 android:layout_below="@+id/item_inner_RL_TV4_id"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/aaa"
                 android:scaleType="centerCrop"
                 />
 

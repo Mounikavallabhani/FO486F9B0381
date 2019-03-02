@@ -16,6 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.hani.social_app.R;
+import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_two.ViewHolder> {
 
@@ -58,14 +62,15 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
 
 
     public Discover_Adapter_two.onClick itemclick;
-
+    private List<NewsDataMode> News_List_adapter;
     public interface onClick{
         void clickAction(int pos);
     }
 
 
-    public Discover_Adapter_two(Discover_Adapter_two.onClick itemclick) {
+    public Discover_Adapter_two(onClick itemclick, List<NewsDataMode> news_List) {
         this.itemclick = itemclick;
+        this.News_List_adapter=news_List;
     }
 
     @NonNull
@@ -81,10 +86,19 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
             viewHolder.imageView.setClipToOutline(true);
             viewHolder.RL.setClipToOutline(true);
         }
+        NewsDataMode News = News_List_adapter.get(i);
 
-        viewHolder.imageView.setImageResource(img[i]);
-        viewHolder.textView.setText(text[i]);
-        viewHolder.textView1.setText(text1[i]);
+
+      //  viewHolder.imageView.setImageResource(img[i]);
+
+        Picasso.get()
+                .load(News.getImage_url())
+                .placeholder(R.mipmap.ic_dnews)
+                .error(R.mipmap.ic_dnews)
+                .into(viewHolder.imageView);
+
+        viewHolder.textView.setText(News.getTitle());
+        viewHolder.textView1.setText(News.getCategory());
         viewHolder.textView1.setTextColor(text2[i]);
 
         viewHolder.onbind(i,itemclick);
@@ -92,7 +106,7 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
 
     @Override
     public int getItemCount() {
-        return img.length;
+        return News_List_adapter.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

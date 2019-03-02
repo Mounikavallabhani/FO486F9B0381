@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:layout_width="24dp"
@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_username_ET_id"
+                android:singleLine="true"
                 android:background="@android:color/transparent"
                 android:layout_below="@+id/login_TV1_id"
                 android:hint="Username or Email"
@@ -67,18 +68,37 @@
                 android:id="@+id/login_password_ET_id"
                 android:background="@android:color/transparent"
                 android:paddingBottom="15dp"
+                android:singleLine="true"
+                android:inputType="textPassword"
                 android:hint="Password"
                 android:textSize="14dp"
                 />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_Button"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/login_password_LL_id"
+            android:background="@drawable/bottom_line_border"
+            android:layout_marginTop="25dp">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:text="LogIn"
+            android:onClick="check"
+            android:layout_height="wrap_content" />
+
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/login_TV2_id"
             android:text="Forgot password? "
-            android:layout_below="@+id/login_password_LL_id"
+            android:layout_below="@+id/login_Button"
             android:paddingTop="10dp"
             />
 
@@ -87,13 +107,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/login_TV3_id"
             android:text="Get help signing in."
-            android:layout_below="@+id/login_password_LL_id"
+            android:layout_below="@+id/login_Button"
             android:layout_toRightOf="@+id/login_TV2_id"
             android:paddingTop="10dp"
             android:textColor="@color/blue"
             />
 
-
     </RelativeLayout>
+
+
 
 </RelativeLayout>

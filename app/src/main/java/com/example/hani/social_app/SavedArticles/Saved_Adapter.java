@@ -11,7 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hani.social_app.R;
+import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
+import com.example.hani.social_app.TopNews.Discover_Adapter_two;
 import com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder> {
 
@@ -60,13 +65,33 @@ public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder
     }
 
 
+    public Saved_Adapter.onClick itemclick;
+    private List<NewsDataMode> News_List_adapter;
+    public interface onClick{
+        void clickAction(int pos);
+    }
+
+    public Saved_Adapter(Saved_Adapter.onClick itemclick, List<NewsDataMode> news_List) {
+        this.itemclick = itemclick;
+        this.News_List_adapter=news_List;
+    }
+
+
     @SuppressLint("ResourceAsColor")
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             viewHolder.imageView.setClipToOutline(true);
         }
-        viewHolder.imageView.setImageResource(img[i]);
-        viewHolder.textView.setText(text[i]);
+        NewsDataMode News = News_List_adapter.get(i);
+
+        Picasso.get()
+                .load(News.getImage_url())
+                .placeholder(R.mipmap.ic_dnews)
+                .error(R.mipmap.ic_dnews)
+                .into(viewHolder.imageView);
+
+//        viewHolder.imageView.setImageResource(img[i]);
+        viewHolder.textView.setText(News.getTitle());
         viewHolder.textView1.setText(text2[i]);
         viewHolder.RKL.setBackgroundResource(text1[i]);
 
@@ -74,7 +99,7 @@ public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return img.length;
+        return News_List_adapter.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
