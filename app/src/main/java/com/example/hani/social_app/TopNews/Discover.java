@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.MainActivity;
 import com.example.hani.social_app.R;
+import com.example.hani.social_app.SharedPref.SharedPrefrence;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
 import com.example.hani.social_app.TopNews.LoginSignup.Login_details;
 import com.example.hani.social_app.TopNews.NewsDetail_f.NewsDetail_F;
@@ -53,6 +54,7 @@ public class Discover extends Fragment implements View.OnClickListener {
 
     private List<NewsDataMode> News_List;
     private ProgressDialog pDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -74,6 +76,7 @@ public class Discover extends Fragment implements View.OnClickListener {
         }else{
             /// ==> If Wifi is not available.
             // ==> Data get from SharedPreference
+            get_discover_offline();
 
         }
 
@@ -83,9 +86,51 @@ public class Discover extends Fragment implements View.OnClickListener {
 
     }
 
+    public void get_discover_offline() {
 
+        String Cate_json_offline = SharedPrefrence.get_offline(getContext(),SharedPrefrence.shared_discover_news_key);
+        try {
+            JSONObject response = new JSONObject(Cate_json_offline);
 
+            JSONArray Arr = response.getJSONArray("msg");
+            for(int i=0; i< Arr.length(); i++){
+                JSONObject news_obj= Arr.getJSONObject(i);
+                JSONObject News = news_obj.getJSONObject("News");
+                News.getString("title");
+                News.getInt("id");
+                JSONObject category_obj = news_obj.getJSONObject("Category");
+                category_obj.getString("name");
+                NewsDataMode a = new NewsDataMode(News.getString("attachment")
+                        ,News.getString("title"),
+                        News.getString("description"),
+                        category_obj.getString("name"),
+                        News.getInt("id")
 
+                );
+                News_List.add(a);
+            }
+            adapter2 = new Discover_Adapter_two(new Discover_Adapter_two.onClick() {
+                @Override
+                public void clickAction(int pos) {
+
+                    //   News_List.get(pos);
+                    NewsDataMode News = News_List.get(pos);
+                    Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
+                    myIntent.putExtra("news_id",  News.getId()); //Optional parameters
+                    getContext().startActivity(myIntent);
+                    Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
+                    //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
+
+                }
+            },News_List);
+            GridLayoutManager GLM = new GridLayoutManager(getContext(),2);
+            RV2.setLayoutManager(GLM);
+            RV2.setAdapter(adapter2);
+
+        }catch (Exception b){
+
+        }
+    }
 
     public void init(){
 
@@ -165,6 +210,8 @@ public class Discover extends Fragment implements View.OnClickListener {
             @Override
             public void notifySuccess(String requestType, JSONObject response) {
                 Variables.hidepDialog(pDialog);
+
+                SharedPrefrence.save_response_share(getContext(),response.toString(),SharedPrefrence.shared_discover_news_key);
 
                 try{
 

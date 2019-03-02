@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.R;
+import com.example.hani.social_app.SharedPref.SharedPrefrence;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
 import com.example.hani.social_app.TopNews.Discover_Adapter_two;
 import com.example.hani.social_app.TopNews.NewsDetail_f.NewsDetail_F;
@@ -41,6 +42,7 @@ public class Saved extends Fragment {
 //    VolleyService mVolleyService;
     private List<NewsDataMode> News_List;
     private String TAG = "Saved";
+    boolean is_wifi_availeable;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,19 +52,64 @@ public class Saved extends Fragment {
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
-
+        is_wifi_availeable=Variables.is_internet_avail(getContext());
         RV = (RecyclerView) view.findViewById(R.id.saved_RV_id);
         News_List = new ArrayList<>();
 
+        if(is_wifi_availeable==true){
+            // If Wifi Available
+            Get_Saved_News();
 
-
-        //adapter = new Saved_Adapter();
-        Get_Saved_News();
-//        RV.setLayoutManager(new LinearLayoutManager(getContext()));
-//        RV.setAdapter(adapter);
+        }else{
+            // If wifi not available
+            get_category_date_offline();
+        }
         return view;
 
     }
+
+
+    public void get_category_date_offline(){
+
+        String Saved_json_offline = SharedPrefrence.get_offline(getContext(),SharedPrefrence.shared_saved_news_key);
+        try {
+            JSONObject response = new JSONObject(Saved_json_offline);
+
+            JSONArray Arr= response.getJSONArray("msg");
+            for(int i=0;i< Arr.length();i++){
+                JSONObject news_obj= Arr.getJSONObject(i);
+                JSONObject News = news_obj.getJSONObject("News");
+                News.getString("title");
+                //  News.getString("id");
+                JSONObject category_obj = news_obj.getJSONObject("Category");
+                category_obj.getString("name");
+                NewsDataMode a = new NewsDataMode(News.getString("attachment")
+                        ,News.getString("title"),
+                        News.getString("description"),
+                        category_obj.getString("name"),
+                        News.getInt("id")
+                );
+                News_List.add(a);
+            }
+            // => Set Adapter
+            adapter = new Saved_Adapter(new Saved_Adapter.onClick() {
+                @Override
+                public void clickAction(int pos) {
+
+                    startActivity(new Intent(getContext(), NewsDetail_F.class));
+
+                }
+            },News_List);
+            //   Variables.hidepDialog(getContext());
+            RV.setLayoutManager(new LinearLayoutManager(getContext()));
+            RV.setAdapter(adapter);
+
+        }catch (Exception c){
+
+        }
+
+    }
+
 
     // Get Data From API
     public void Get_Saved_News(){
@@ -92,7 +139,10 @@ public class Saved extends Fragment {
                 //    Toast.makeText(getContext(), ""+response.toString(), Toast.LENGTH_SHORT).show();
                 //Log.d(TAG, "Volley JSON post" + response);
                 Variables.Log_d_msg(getContext(),""+response);
-               // Variables.hidepDialog(getContext());
+
+                SharedPrefrence.save_response_share(getContext(),response.toString(),SharedPrefrence.shared_saved_news_key);
+
+                // Variables.hidepDialog(getContext());
                 try{
                     Variables.hidepDialog(pDialog);
 

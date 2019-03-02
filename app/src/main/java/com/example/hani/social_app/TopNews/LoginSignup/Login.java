@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.MainActivity;
 import com.example.hani.social_app.R;
+import com.example.hani.social_app.SharedPref.SharedPrefrence;
 import com.example.hani.social_app.VolleyReq.IResult;
 import com.example.hani.social_app.VolleyReq.VolleyService;
 
@@ -45,6 +46,8 @@ public class Login extends AppCompatActivity {
         TV = (TextView) findViewById(R.id.login_TV2_id);
 //        loading = findViewById(R.id.progressbar);
 //        loading_text = findViewById(R.id.loading);
+
+        SharedPrefrence.get_offline(this,"name");
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");

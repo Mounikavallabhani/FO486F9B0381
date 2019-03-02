@@ -18,6 +18,7 @@ import com.example.hani.social_app.Category.CategoryModel.CategoryModel;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.SavedArticles.Saved_Adapter;
+import com.example.hani.social_app.SharedPref.SharedPrefrence;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
 import com.example.hani.social_app.TopNews.NewsDetail_f.NewsDetail_F;
 import com.example.hani.social_app.TopNews.itemdecoration;
@@ -39,8 +40,8 @@ public class Catergory extends Fragment {
 
     // Define List
     private List<CategoryModel> Category_List;
-
     private ProgressDialog pDialog;
+    boolean is_wifi_availeable;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -50,6 +51,8 @@ public class Catergory extends Fragment {
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+        Category_List = new ArrayList<>();
+        is_wifi_availeable=Variables.is_internet_avail(getContext());
 
         recyclerView = (RecyclerView) view.findViewById(R.id.category_RV_id);
 //        adapter = new Category_Adapter();
@@ -62,14 +65,67 @@ public class Catergory extends Fragment {
         int spacing = 10;
         boolean includeEdge = true;
         recyclerView.addItemDecoration(new itemdecoration(spacing, spanCount, includeEdge));
-        Get_Categories();
+ if(is_wifi_availeable==true){
+     // If Wifi Available
+     Get_Categories();
+
+ }else{
+     // If wifi not available
+     get_category_date_offline();
+ }
+            //Get_Categories();
+
         return view;
     }
+
+
+    public void get_category_date_offline(){
+
+        String Cate_json_offline = SharedPrefrence.get_offline(getContext(),SharedPrefrence.shared_category_key);
+        try {
+            JSONObject response = new JSONObject(Cate_json_offline);
+            JSONArray Arr= response.getJSONArray("msg");
+
+            for(int i=0; i< Arr.length(); i++){
+                JSONObject news_obj= Arr.getJSONObject(i);
+                JSONObject News = news_obj.getJSONObject("Category");
+                News.getString("name");
+                News.getString("image");
+                News.getInt("id");
+
+                CategoryModel Category = new CategoryModel(
+                        News.getString("name"),
+                        News.getString("image"),
+                        News.getInt("id")
+                );
+                Category_List.add(Category);
+            }
+
+            adapter = new Category_Adapter(new Category_Adapter.onClick() {
+                @Override
+                public void clickAction(int pos) {
+
+                    startActivity(new Intent(getContext(), NewsDetail_F.class));
+
+                }
+            },Category_List);
+
+            recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            recyclerView.setAdapter(adapter);
+
+
+        } catch (JSONException e) {
+            Variables.toast_msg(getContext(),""+e.toString());
+            e.printStackTrace();
+        }
+
+    }
+
 
     // Get Data From API
     public void Get_Categories(){
         Variables.showpDialog(pDialog);
-        Category_List = new ArrayList<>();
+
         initVolleyCallback();
 
         Variables.mVolleyService = new VolleyService(Variables.mResultCallback,getContext());
@@ -93,6 +149,11 @@ public class Catergory extends Fragment {
                 Variables.hidepDialog(pDialog);
                 try{
                     JSONArray Arr= response.getJSONArray("msg");
+                    // Save Response for Offline Showing Data
+
+                    SharedPrefrence.save_response_share(getContext(),response.toString(),SharedPrefrence.shared_category_key);
+
+
                     for(int i=0; i< Arr.length(); i++){
                         JSONObject news_obj= Arr.getJSONObject(i);
                         JSONObject News = news_obj.getJSONObject("Category");

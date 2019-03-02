@@ -20,6 +20,7 @@ import com.example.hani.social_app.Category.Catergory;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.SavedArticles.Saved;
 import com.example.hani.social_app.Search.Search;
+import com.example.hani.social_app.SharedPref.SharedPrefrence;
 import com.example.hani.social_app.TopNews.Discover;
 import com.example.hani.social_app.VolleyReq.IResult;
 import com.example.hani.social_app.VolleyReq.VolleyService;
@@ -53,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
 
         Variables.toast_msg(this,"Internet "+is_wifi_availeable);
 
+      //  SharedPrefrence.save_response_share(this,"Usama Daood");
 
+//        SharedPrefrence.get_offline(this,"name");
         // Get Response
       //  get_response();
     }
     // Testing Purpose.
+
     public void get_response(){
         initVolleyCallback();
 
