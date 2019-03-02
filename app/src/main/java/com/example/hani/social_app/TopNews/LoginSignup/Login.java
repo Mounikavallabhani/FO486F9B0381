@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
     // Progress dialog
     // Progress dialog
     private ProgressDialog pDialog;
+    boolean is_wifi_availeable;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +48,17 @@ public class Login extends AppCompatActivity {
 //        loading = findViewById(R.id.progressbar);
 //        loading_text = findViewById(R.id.loading);
 
-        SharedPrefrence.get_offline(this,"name");
+        //SharedPrefrence.get_offline(this,"name");
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
 
+        //// Check Network Availability
+        is_wifi_availeable=Variables.is_internet_avail(this);
 
-   //     Variables.hide(loading,loading_text);
+
+        //     Variables.hide(loading,loading_text);
 
         EditEmail = findViewById(R.id.login_username_ET_id);
         EditPassword = findViewById(R.id.login_password_ET_id);
@@ -82,7 +86,21 @@ public class Login extends AppCompatActivity {
         }else if(EditPassword.getText().toString().trim().equalsIgnoreCase("")){
             EditPassword.setError("Password cant be empty.");
         }else{
-            LogIn();
+            if(is_wifi_availeable==true){
+                // If internet Available
+                LogIn();
+            }else{
+                String title="Info";
+                String msg="You are connected to internet.Please turn on internet and try again later. Thanks.";
+                try{
+                    Variables.alert_dialogue(this,""+title,""+msg);
+                }catch (Exception t){
+
+                }
+
+
+            }
+
         }
     }
     // Testing Purpose.

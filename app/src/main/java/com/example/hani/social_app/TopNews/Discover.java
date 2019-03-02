@@ -91,7 +91,6 @@ public class Discover extends Fragment implements View.OnClickListener {
         String Cate_json_offline = SharedPrefrence.get_offline(getContext(),SharedPrefrence.shared_discover_news_key);
         try {
             JSONObject response = new JSONObject(Cate_json_offline);
-
             JSONArray Arr = response.getJSONArray("msg");
             for(int i=0; i< Arr.length(); i++){
                 JSONObject news_obj= Arr.getJSONObject(i);
