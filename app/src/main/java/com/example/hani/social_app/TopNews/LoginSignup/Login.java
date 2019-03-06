@@ -45,19 +45,12 @@ public class Login extends AppCompatActivity {
 
         IV = (ImageView) findViewById(R.id.login_back_IV_id);
         TV = (TextView) findViewById(R.id.login_TV2_id);
-//        loading = findViewById(R.id.progressbar);
-//        loading_text = findViewById(R.id.loading);
-
-        //SharedPrefrence.get_offline(this,"name");
-
         pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Please wait...");
+        pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
 
         //// Check Network Availability
         is_wifi_availeable=Variables.is_internet_avail(this);
-
-
         //     Variables.hide(loading,loading_text);
 
         EditEmail = findViewById(R.id.login_username_ET_id);
@@ -137,6 +130,8 @@ public class Login extends AppCompatActivity {
                 Log.d(TAG, "Volley requester " + requestType);
                 Toast.makeText(Login.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Volley JSON post" + response);
+
+                finish();
 
             }
 

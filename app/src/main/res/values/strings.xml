@@ -7,4 +7,13 @@
     <string name="loading_text">Please wait..</string>
     <string name="email_set_errors">Email cant be empty.</string>
     <string name="password_set_errors">Password cant be empty.</string>
+    <string name="login">Log in to dnews</string>
+    <string name="signup">Sign up to dnews</string>
+    <string name="forgot_password">Forgot password? </string>
+    <!--Signup String is here-->
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

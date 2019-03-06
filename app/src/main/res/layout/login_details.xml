@@ -58,8 +58,10 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/button_sign_up"
                 android:background="@android:color/transparent"
                 android:text="Sign Up with Email"
+                android:onClick="open_sign_up_page"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 />

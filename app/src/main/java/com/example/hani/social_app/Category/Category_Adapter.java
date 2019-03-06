@@ -3,9 +3,12 @@ package com.example.hani.social_app.Category;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +19,10 @@ import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
 import com.example.hani.social_app.TopNews.Discover_Adapter_two;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.ViewHolder> {
+public class Category_Adapter extends RecyclerView.Adapter<Category_Adapter.ViewHolder>  {
 
 
 
@@ -63,14 +67,55 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
     public Category_Adapter.onClick itemclick;
     private List<CategoryModel> Category_list;
+    private List<CategoryModel> Category_list_Filtered;
     public interface onClick{
         void clickAction(int pos);
     }
     public Category_Adapter(Category_Adapter.onClick itemclick, List<CategoryModel> Category_list) {
         this.itemclick = itemclick;
         this.Category_list=Category_list;
+        this.Category_list_Filtered=Category_list;
     }
+//    @Override
+//    public Filter getFilter() {
+//        return new Filter() {
+//            @Override
+//            protected FilterResults performFiltering(CharSequence charSequence) {
+//                String charString = charSequence.toString();
+//                if (charString.isEmpty()) {
+//                    Category_list = Category_list_Filtered;
+//                } else {
+//                    List<CategoryModel> filteredList = new ArrayList<>();
+//                    for (CategoryModel row : Category_list) {
+//
+//                        // name match condition. this might differ depending on your requirement
+//                        // here we are looking for name or phone number match
+//                        if (row.getName().toLowerCase().contains(charString.toLowerCase()) || row.getName().contains(charSequence)) {
+//                            Log.d("cat",""+row.getName());
+//                            filteredList.add(row);
+//                        }
+//                    }
+//
+//                    Category_list_Filtered = filteredList;
+//                }
+//
+//                FilterResults filterResults = new FilterResults();
+//                filterResults.values = Category_list_Filtered;
+//                return filterResults;
+//            }
+//
+//            @Override
+//            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//                Category_list_Filtered = (ArrayList<CategoryModel>) filterResults.values;
+//                notifyDataSetChanged();
+//            }
+//        };
+//    }
 
+    public void updateList(ArrayList<CategoryModel> list){
+        Category_list = list;
+        notifyDataSetChanged();
+    }
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         viewHolder.imageView.setClipToOutline(true);
@@ -90,7 +135,7 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         }
 
-@Override
+    @Override
 public int getItemCount() {
         return Category_list.size();
         }
@@ -109,4 +154,5 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     }
 }
+
 }

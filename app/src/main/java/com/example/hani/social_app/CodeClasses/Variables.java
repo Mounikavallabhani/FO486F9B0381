@@ -42,6 +42,7 @@ public class Variables {
     public static String NewsCategories = BASEURL + "api/showCategories";
     public static String AddFavouriteNews = BASEURL + "api/AddFavouriteNews";
 
+
     public static IResult mResultCallback = null;
     public static VolleyService mVolleyService;
 
@@ -103,7 +104,7 @@ public class Variables {
 
         // New Code
         // TODO: 3/5/2019
-//        avail = true;
+     //  avail = true;
         return avail;
 
     }

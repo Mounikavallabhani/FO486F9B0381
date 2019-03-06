@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +21,7 @@ public class Login_details extends Fragment {
     ImageView IV,instagram,cross;
     HorizontalScrollView HSV;
     TextView TV;
-
+    Button butt_sign_up;
     public Login_details() {
     }
 
@@ -34,7 +35,7 @@ public class Login_details extends Fragment {
         ViewGroup.LayoutParams lp = v.getLayoutParams();
         lp.height = (int) (Variables.height * 0.35);
         v.setLayoutParams(lp);
-
+        butt_sign_up = view.findViewById(R.id.button_sign_up);
 
         HSV = (HorizontalScrollView) view.findViewById(R.id.login_details_scrollview_id);
        // instagram = (ImageView) view.findViewById(R.id.login_details_instagram_iV_id);
@@ -49,22 +50,22 @@ public class Login_details extends Fragment {
             }
         });
 
+        butt_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SignUp.class));
+            }
+        });
+
+
         TV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), Login.class));
             }
         });
-
-//        IV.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                instagram.setVisibility(View.VISIBLE);
-//                IV.setVisibility(View.GONE);
-//            }
-//        });
-
         return view;
 
     }
+
 }
