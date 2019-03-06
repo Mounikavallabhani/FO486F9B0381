@@ -47,7 +47,7 @@
                 android:singleLine="true"
                 android:background="@android:color/transparent"
                 android:layout_below="@+id/login_TV1_id"
-                android:hint="Username or Email"
+                android:hint="Email"
                 android:paddingBottom="15dp"
                 android:textSize="14dp"
                 />
@@ -80,38 +80,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/login_Button"
-            android:layout_margin="10dp"
             android:layout_below="@+id/login_password_LL_id"
             android:background="@drawable/bottom_line_border"
             android:layout_marginTop="25dp">
 
 
-        <Button
-            android:layout_width="match_parent"
-            android:text="LogIn"
-            android:onClick="check"
-            android:layout_height="wrap_content" />
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:text="LogIn"-->
+            <!--android:onClick="check"-->
+            <!--android:layout_height="wrap_content" />-->
+
 
         </LinearLayout>
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/login_TV2_id"
+            android:textAlignment="center"
             android:text="Forgot password? "
+            android:textColor="@color/blue"
             android:layout_below="@+id/login_Button"
             android:paddingTop="10dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/login_TV3_id"
-            android:text="Get help signing in."
-            android:layout_below="@+id/login_Button"
-            android:layout_toRightOf="@+id/login_TV2_id"
-            android:paddingTop="10dp"
-            android:textColor="@color/blue"
-            />
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:onClick="check"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="35dp"
+            android:src="@drawable/ic_next_white"/>
 
     </RelativeLayout>
 

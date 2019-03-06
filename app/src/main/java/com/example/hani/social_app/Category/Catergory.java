@@ -49,7 +49,7 @@ public class Catergory extends Fragment {
         view = inflater.inflate(R.layout.category, container, false);
         // Progress Dialogue init
         pDialog = new ProgressDialog(getContext());
-        pDialog.setMessage("Please wait...");
+        pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
         Category_List = new ArrayList<>();
         is_wifi_availeable=Variables.is_internet_avail(getContext());

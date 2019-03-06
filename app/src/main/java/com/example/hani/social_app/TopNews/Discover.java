@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -34,12 +35,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Discover extends Fragment implements View.OnClickListener {
-
     View view;
     TabLayout TL;
     RecyclerView RV1,RV2;
@@ -54,7 +57,7 @@ public class Discover extends Fragment implements View.OnClickListener {
 
     private List<NewsDataMode> News_List;
     private ProgressDialog pDialog;
-
+    TextView current_date;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -62,9 +65,20 @@ public class Discover extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.discover, container, false);
         init();
         pDialog = new ProgressDialog(getContext());
-        pDialog.setMessage("Please wait...");
+        pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
 
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd, yyyy");
+        String formattedDate = df.format(c);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+
+        Calendar cal= Calendar.getInstance();
+        SimpleDateFormat month_date = new SimpleDateFormat("MMMM");
+        String month_name = month_date.format(cal.getTime());
+        current_date.setText(dayOfTheWeek+" "+month_name+" "+formattedDate);
         //// Check Network Availability
         is_wifi_availeable=Variables.is_internet_avail(getContext());
 
@@ -79,9 +93,6 @@ public class Discover extends Fragment implements View.OnClickListener {
             get_discover_offline();
 
         }
-
-
-
         return view;
 
     }
@@ -89,46 +100,54 @@ public class Discover extends Fragment implements View.OnClickListener {
     public void get_discover_offline() {
 
         String Cate_json_offline = SharedPrefrence.get_offline(getContext(),SharedPrefrence.shared_discover_news_key);
-        try {
-            JSONObject response = new JSONObject(Cate_json_offline);
-            JSONArray Arr = response.getJSONArray("msg");
-            for(int i=0; i< Arr.length(); i++){
-                JSONObject news_obj= Arr.getJSONObject(i);
-                JSONObject News = news_obj.getJSONObject("News");
-                News.getString("title");
-                News.getInt("id");
-                JSONObject category_obj = news_obj.getJSONObject("Category");
-                category_obj.getString("name");
-                NewsDataMode a = new NewsDataMode(News.getString("attachment")
-                        ,News.getString("title"),
-                        News.getString("description"),
-                        category_obj.getString("name"),
-                        News.getInt("id")
 
-                );
-                News_List.add(a);
-            }
-            adapter2 = new Discover_Adapter_two(new Discover_Adapter_two.onClick() {
-                @Override
-                public void clickAction(int pos) {
+        if(Cate_json_offline != null){
+            // ==> If Values is not Null
+            try {
+                JSONObject response = new JSONObject(Cate_json_offline);
+                JSONArray Arr = response.getJSONArray("msg");
+                for(int i=0; i< Arr.length(); i++){
+                    JSONObject news_obj= Arr.getJSONObject(i);
+                    JSONObject News = news_obj.getJSONObject("News");
+                    News.getString("title");
+                    News.getInt("id");
+                    JSONObject category_obj = news_obj.getJSONObject("Category");
+                    category_obj.getString("name");
+                    NewsDataMode a = new NewsDataMode(News.getString("attachment")
+                            ,News.getString("title"),
+                            News.getString("description"),
+                            category_obj.getString("name"),
+                            News.getInt("id")
 
-                    //   News_List.get(pos);
-                    NewsDataMode News = News_List.get(pos);
-                    Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
-                    myIntent.putExtra("news_id",  News.getId()); //Optional parameters
-                    getContext().startActivity(myIntent);
-                    Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
-                    //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
-
+                    );
+                    News_List.add(a);
                 }
-            },News_List);
-            GridLayoutManager GLM = new GridLayoutManager(getContext(),2);
-            RV2.setLayoutManager(GLM);
-            RV2.setAdapter(adapter2);
+                adapter2 = new Discover_Adapter_two(new Discover_Adapter_two.onClick() {
+                    @Override
+                    public void clickAction(int pos) {
+                        //   News_List.get(pos);
+                        NewsDataMode News = News_List.get(pos);
+                        Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
+                        myIntent.putExtra("news_id",  News.getId()); //Optional parameters
+                        getContext().startActivity(myIntent);
+                        Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
+                        //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
 
-        }catch (Exception b){
+                    }
+                },News_List);
+                GridLayoutManager GLM = new GridLayoutManager(getContext(),2);
+                RV2.setLayoutManager(GLM);
+                RV2.setAdapter(adapter2);
 
+            }catch (Exception b){
+
+            }
+        }else{
+            // If Values is Null
+            // Get News
+            Get_News();
         }
+
     }
 
     public void init(){
@@ -138,6 +157,8 @@ public class Discover extends Fragment implements View.OnClickListener {
         RV1 = (RecyclerView) view.findViewById(R.id.RV_id);
 
         RV2 = (RecyclerView) view.findViewById(R.id.discover_RL2_RV2_id);
+        current_date = view.findViewById(R.id.dicover_date_id);
+
         RV2.setNestedScrollingEnabled(false);
         News_List = new ArrayList<>();
         LL = (RelativeLayout) view.findViewById(R.id.discover_LL_id);
@@ -209,7 +230,6 @@ public class Discover extends Fragment implements View.OnClickListener {
             @Override
             public void notifySuccess(String requestType, JSONObject response) {
                 Variables.hidepDialog(pDialog);
-
                 SharedPrefrence.save_response_share(getContext(),response.toString(),SharedPrefrence.shared_discover_news_key);
 
                 try{
@@ -220,13 +240,17 @@ public class Discover extends Fragment implements View.OnClickListener {
                           JSONObject News = news_obj.getJSONObject("News");
                           News.getString("title");
                           News.getInt("id");
+                          News.getInt("favourite");
                           JSONObject category_obj = news_obj.getJSONObject("Category");
                           category_obj.getString("name");
-                          NewsDataMode a = new NewsDataMode(News.getString("attachment")
+
+                          NewsDataMode a = new NewsDataMode(
+                                  News.getString("attachment")
                                   ,News.getString("title"),
                                   News.getString("description"),
                                   category_obj.getString("name"),
-                                  News.getInt("id")
+                                  News.getInt("id"),
+                                  News.getInt("favourite")
 
                                   );
                           News_List.add(a);
@@ -238,7 +262,9 @@ public class Discover extends Fragment implements View.OnClickListener {
                          //   News_List.get(pos);
                             NewsDataMode News = News_List.get(pos);
                             Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
-                            myIntent.putExtra("news_id",  News.getId()); //Optional parameters
+                            myIntent.putExtra("news_id",  News.getId());
+                            myIntent.putExtra("like_or_dislike",  News.getLike_dislile());
+                            //Optional parameters
                             getContext().startActivity(myIntent);
                             Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
                             //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
@@ -250,7 +276,7 @@ public class Discover extends Fragment implements View.OnClickListener {
                     RV2.setAdapter(adapter2);
 
                 }catch (Exception v){
-                    Variables.hidepDialog(pDialog);
+                        Variables.hidepDialog(pDialog);
                     Toast.makeText(getContext(), "Error in c "+v.toString(), Toast.LENGTH_SHORT).show();
 
                 }
@@ -258,7 +284,16 @@ public class Discover extends Fragment implements View.OnClickListener {
             }
             @Override
             public void notifyError(String requestType, VolleyError error) {
-                Variables.hidepDialog(pDialog);
+               // error.get
+            //    int status_code = error.networkResponse.statusCode;
+    try{
+        int status_code = Variables.volley_get_response_code(error);
+        Variables.hidepDialog(pDialog);
+        Variables.toast_msg(getContext(),""+error+" Response Code "+status_code);
+
+    }catch (Exception v){
+        Variables.hidepDialog(pDialog);
+    }
 
                  }
         };

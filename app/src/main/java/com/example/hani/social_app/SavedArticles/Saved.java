@@ -50,7 +50,7 @@ public class Saved extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.saved, container, false);
         pDialog = new ProgressDialog(getContext());
-        pDialog.setMessage("Please wait...");
+        pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
         is_wifi_availeable=Variables.is_internet_avail(getContext());
         RV = (RecyclerView) view.findViewById(R.id.saved_RV_id);

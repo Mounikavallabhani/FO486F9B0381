@@ -14,6 +14,7 @@ public class SharedPrefrence {
     public static String shared_category_key = "category";
     public static String shared_saved_news_key = "saved";
     public static String shared_discover_news_key = "discover";
+    public static String shared_user_login_detail_key = "user_info";
 
     public static void init_share(Context context){
         pref = context.getSharedPreferences("Dnews", 0); // 0 - for private mode

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">dnews</string>
+    <string name="categories">Categories</string>
+    <string name="category_search">Search Categories</string>
+    <string name="saved_articles">Saved Articles</string>
+    <string name="save_article_search">Search Articles</string>
+    <string name="loading_text">Please wait..</string>
+    <string name="email_set_errors">Email cant be empty.</string>
+    <string name="password_set_errors">Password cant be empty.</string>
 </resources>

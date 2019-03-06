@@ -82,9 +82,9 @@ public class Login extends AppCompatActivity {
 
     public void check(View v){
         if(EditEmail.getText().toString().trim().equalsIgnoreCase("")){
-            EditEmail.setError("Email or Username cant be empty.");
+            EditEmail.setError(getResources().getString(R.string.email_set_errors));
         }else if(EditPassword.getText().toString().trim().equalsIgnoreCase("")){
-            EditPassword.setError("Password cant be empty.");
+            EditPassword.setError(getResources().getString(R.string.password_set_errors));
         }else{
             if(is_wifi_availeable==true){
                 // If internet Available
@@ -129,9 +129,15 @@ public class Login extends AppCompatActivity {
             @Override
             public void notifySuccess(String requestType, JSONObject response) {
                 Variables.hidepDialog(pDialog);
+                // Add User info Json into Shared Prefrence
+
+                SharedPrefrence.save_response_share(Login.this,response.toString(),SharedPrefrence.shared_user_login_detail_key);
+
+
                 Log.d(TAG, "Volley requester " + requestType);
                 Toast.makeText(Login.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Volley JSON post" + response);
+
             }
 
 

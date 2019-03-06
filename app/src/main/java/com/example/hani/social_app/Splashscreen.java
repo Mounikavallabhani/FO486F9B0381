@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hani.social_app.CodeClasses.Variables;
+import com.example.hani.social_app.SharedPref.SharedPrefrence;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -20,7 +24,6 @@ public class Splashscreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.splashscreen);
 
         imageView = (ImageView) findViewById(R.id.splashscreen_imageview_id);
@@ -31,32 +34,47 @@ public class Splashscreen extends AppCompatActivity {
         Variables.width = displayMetrics.widthPixels;
 
 
-
         Animation splashscreen = AnimationUtils.loadAnimation(this, R.anim.anim);
         imageView.startAnimation(splashscreen);
 
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
+      // boolean is_avail = Variables.is_internet_avail(Splashscreen.this);
 
-                try {
+        String user_info_json = SharedPrefrence.get_offline(Splashscreen.this,SharedPrefrence.shared_user_login_detail_key);
+        if(user_info_json != null){
+            // ==> If Values is not Null
+            try {
+               // Variables.toast_msg(Splashscreen.this,"User Info "+user_info_json);
+                JSONObject response = new JSONObject(user_info_json);
+                JSONObject Arr= response.getJSONObject("msg");
+                JSONObject Arr_1 = Arr.getJSONObject("User");
+                Arr_1.getString("first_name");
 
-                    sleep(3000);
-
-                } catch (InterruptedException e) {
-
-                    e.printStackTrace();
-
-                }
-
-                startActivity(new Intent(Splashscreen.this, MainActivity.class));
-                finish();
+            }catch (Exception b){
 
             }
+        }
 
-        };
+        Thread thread = new Thread() {
+               @Override
+               public void run() {
 
-        thread.start();
+                   try {
 
+                       sleep(3000);
+
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+
+
+                   }
+
+                   startActivity(new Intent(Splashscreen.this, MainActivity.class));
+                   finish();
+
+               }
+
+           };
+
+           thread.start();
     }
 }

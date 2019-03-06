@@ -6,13 +6,30 @@ public class NewsDataMode {
     String image_url;
     String category;
     int id;
-
+    int like_dislile;
     public NewsDataMode(String imageUrl, String title, String description,String category,int id) {
         this.image_url = imageUrl;
         this.title = title;
         this.description = description;
         this.category=category;
         this.id=id;
+    }
+
+    public NewsDataMode(String imageUrl, String title, String description,String category,int id,int like_dislile) {
+        this.image_url = imageUrl;
+        this.title = title;
+        this.description = description;
+        this.category=category;
+        this.id=id;
+        this.like_dislile=like_dislile;
+    }
+
+    public int getLike_dislile() {
+        return like_dislile;
+    }
+
+    public void setLike_dislile(int like_dislile) {
+        this.like_dislile = like_dislile;
     }
 
     public String getCategory() {

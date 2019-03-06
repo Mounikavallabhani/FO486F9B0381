@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:id="@+id/item_TB_id"
-        android:background="@color/blue"
-        >
+        android:background="@color/blue">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,14 +44,11 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_fontsize"
                 android:scaleType="centerCrop"
+                android:onClick="increase_font_size"
                 android:padding="8dp"
                 android:layout_marginRight="20dp"
                 />
-
-
         </RelativeLayout>
-
-
     </android.support.v7.widget.Toolbar>
     
     <ScrollView
@@ -180,6 +176,8 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/item_bottom_RL_download_IV_id"
             android:layout_marginLeft="15dp"
+            android:onClick="like_button"
+            android:visibility="gone"
             android:src="@drawable/ic_like"
             />
 
@@ -190,6 +188,8 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/item_bottom_RL_like_IV_id"
             android:layout_marginLeft="15dp"
+            android:onClick="DisLike_News"
+            android:visibility="gone"
             android:src="@drawable/ic_dislike"
             />
 

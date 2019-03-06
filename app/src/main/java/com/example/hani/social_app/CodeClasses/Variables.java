@@ -7,14 +7,25 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
 import com.example.hani.social_app.SavedArticles.Saved;
 import com.example.hani.social_app.VolleyReq.IResult;
 import com.example.hani.social_app.VolleyReq.VolleyService;
+
+import okhttp3.internal.http2.ErrorCode;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
@@ -23,13 +34,13 @@ public class Variables {
     public static int MY_SOCKET_TIMEOUT_MS = 30000;  // 30 Seconds
     public static int height;
     public static int width;
-    public static String LoginApi = "http://bringthings.com/news/api/login";
-    public static String SignUpApi = "http://bringthings.com/news/api/registerUser";
-    public static String SavedNewsAPI = "http://bringthings.com/news/api/showFavouriteNews";
-    public static String ShowsNewsAPI =  "http://bringthings.com/news/api/showNews";
-    public static String News_detail= "http://bringthings.com/news/api/showNewsDetail";
-    public static String NewsCategories = "http://bringthings.com/news/api/showCategories";
-
+    public static String LoginApi = BASEURL + "/api/login";
+    public static String SignUpApi = BASEURL + "api/registerUser";
+    public static String SavedNewsAPI = BASEURL + "api/showFavouriteNews";
+    public static String ShowsNewsAPI = BASEURL +  "api/showNews";
+    public static String News_detail= BASEURL + "api/showNewsDetail";
+    public static String NewsCategories = BASEURL + "api/showCategories";
+    public static String AddFavouriteNews = BASEURL + "api/AddFavouriteNews";
 
     public static IResult mResultCallback = null;
     public static VolleyService mVolleyService;
@@ -91,7 +102,8 @@ public class Variables {
         }
 
         // New Code
-
+        // TODO: 3/5/2019
+//        avail = true;
         return avail;
 
     }
@@ -105,7 +117,7 @@ public class Variables {
     }
 
     /// Alert Dialogue
-    public static void alert_dialogue(Context context,String title,String msg){
+    public static void alert_dialogue(final Context context, String title, String msg){
 
         AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setTitle(""+title);
@@ -116,7 +128,9 @@ public class Variables {
                 "Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
                         dialog.cancel();
+
                     }
                 });
 
@@ -133,6 +147,32 @@ public class Variables {
     }
 
     /// End ALet Dialogue
+
+    public static int volley_get_response_code(VolleyError get_error){
+        return get_error.networkResponse.statusCode;
+    }
+
+    public static void increase_font_size(int num_clicks, TextView text_1,TextView text_2){
+        if(num_clicks==1){
+            text_1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+            text_2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        }else if(num_clicks==2){
+            text_1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+            text_2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35);
+        }else if(num_clicks==4) {
+            text_1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
+            text_2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
+        }else if(num_clicks==4){
+            text_1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 55);
+            text_2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 55);
+        }
+
+
+    }
+
+
+
+
 
 }
 

@@ -37,10 +37,10 @@ public class Login_details extends Fragment {
 
 
         HSV = (HorizontalScrollView) view.findViewById(R.id.login_details_scrollview_id);
-        instagram = (ImageView) view.findViewById(R.id.login_details_instagram_iV_id);
+       // instagram = (ImageView) view.findViewById(R.id.login_details_instagram_iV_id);
         cross = (ImageView) view.findViewById(R.id.login_details_cross_IV_id);
         TV = (TextView) view.findViewById(R.id.login_details_RL3_TV2_id);
-        IV = (ImageView) view.findViewById(R.id.login_details_next_scroll_IV_id);
+      //  IV = (ImageView) view.findViewById(R.id.login_details_next_scroll_IV_id);
 
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +56,13 @@ public class Login_details extends Fragment {
             }
         });
 
-        IV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                instagram.setVisibility(View.VISIBLE);
-                IV.setVisibility(View.GONE);
-            }
-        });
+//        IV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                instagram.setVisibility(View.VISIBLE);
+//                IV.setVisibility(View.GONE);
+//            }
+//        });
 
         return view;
 
