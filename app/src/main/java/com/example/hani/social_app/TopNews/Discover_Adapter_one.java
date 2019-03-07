@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.hani.social_app.R;
+import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_one.ViewHolder> {
 
@@ -16,7 +20,15 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
 
     Integer[] img = {R.drawable.aaa,R.drawable.aaa,R.drawable.aaa};
     int width;
-
+    public Discover_Adapter_one.onClick itemclick;
+    private List<NewsDataMode> News_List_adapter;
+    public Discover_Adapter_one(Discover_Adapter_one.onClick itemclick, List<NewsDataMode> news_List) {
+        this.itemclick = itemclick;
+        this.News_List_adapter=news_List;
+    }
+    public interface onClick{
+        void clickAction(int pos);
+    }
 
     @NonNull
     @Override
@@ -43,13 +55,21 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             viewHolder.imageView.setClipToOutline(true);
         }
-        viewHolder.imageView.setImageResource(img[i]);
+        NewsDataMode News = News_List_adapter.get(i);
+
+        Picasso.get()
+                .load(News.getImage_url())
+                .placeholder(R.mipmap.ic_dnews)
+                .error(R.mipmap.ic_dnews)
+                .into(viewHolder.imageView);
+
+      // viewHolder.imageView.setImageResource(img[i]);
 
     }
 
     @Override
     public int getItemCount() {
-        return img.length;
+        return News_List_adapter.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,6 +80,19 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
             super(itemView);
 
             imageView = (ImageView) itemView.findViewById(R.id.item_recyclerview_IV_id);
+
+
+
+        }
+        public void onbind(final int pos, final Discover_Adapter_one.onClick listener){
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.clickAction(pos);
+                }
+
+            });
 
         }
     }

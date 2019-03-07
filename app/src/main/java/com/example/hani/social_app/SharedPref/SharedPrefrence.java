@@ -28,6 +28,12 @@ public class SharedPrefrence {
         editor.commit();
     }
 
+    public static void logout_user(Context context)
+    {
+        init_share(context);
+        pref.edit().remove(shared_user_login_detail_key).commit();
+    }
+
     public static String get_offline(Context context, String key){
         init_share(context);
         pref.getString(key, null);

@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
         View_pager_Adapter viewpageradapter = new View_pager_Adapter(getChildFragmentManager());
         viewpageradapter.addfragment(new Discover(), "");
         viewpageradapter.addfragment(new Catergory(), "");
-        viewpageradapter.addfragment(new Search(), "");
+//        viewpageradapter.addfragment(new Search(), "");
         viewpageradapter.addfragment(new Saved(), "");
 
         pager.setAdapter(viewpageradapter);
@@ -59,19 +59,19 @@ public class MainFragment extends Fragment {
         textView2.setText("Category");
         tabLayout.getTabAt(1).setCustomView(view2);
 
-        View view3 = LayoutInflater.from(getContext()).inflate(R.layout.custom_view, null);
-        ImageView imageView3 = (ImageView) view3.findViewById(R.id.icon);
-        TextView textView3 = (TextView) view3.findViewById(R.id.text);
-        imageView3.setImageResource(R.drawable.ic_search_gray);
-        textView3.setText("Search");
-        tabLayout.getTabAt(2).setCustomView(view3);
+//        View view3 = LayoutInflater.from(getContext()).inflate(R.layout.custom_view, null);
+//        ImageView imageView3 = (ImageView) view3.findViewById(R.id.icon);
+//        TextView textView3 = (TextView) view3.findViewById(R.id.text);
+//        imageView3.setImageResource(R.drawable.ic_search_gray);
+//        textView3.setText("Search");
+//        tabLayout.getTabAt(2).setCustomView(view3);
 
         View view4 = LayoutInflater.from(getContext()).inflate(R.layout.custom_view, null);
         ImageView imageView4 = (ImageView) view4.findViewById(R.id.icon);
         TextView textView4 = (TextView) view4.findViewById(R.id.text);
         imageView4.setImageResource(R.drawable.ic_saved_gray);
         textView4.setText("Saved");
-        tabLayout.getTabAt(3).setCustomView(view4);
+        tabLayout.getTabAt(2).setCustomView(view4);
 
 
         tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
@@ -92,12 +92,12 @@ public class MainFragment extends Fragment {
                         textView.setTextColor(getResources().getColor(R.color.blue));
                         break;
 
-                    case 2:
-                        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_color));
-                        textView.setTextColor(getResources().getColor(R.color.blue));
-                        break;
+//                    case 2:
+//                        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_color));
+//                        textView.setTextColor(getResources().getColor(R.color.blue));
+//                        break;
 
-                    case 3:
+                    case 2:
                         image.setImageDrawable(getResources().getDrawable(R.drawable.ic_saved_color));
                         textView.setTextColor(getResources().getColor(R.color.blue));
                         break;
@@ -124,12 +124,12 @@ public class MainFragment extends Fragment {
                         textView.setTextColor(getResources().getColor(R.color.gray));
                         break;
 
-                    case 2:
-                        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_gray));
-                        textView.setTextColor(getResources().getColor(R.color.gray));
-                        break;
+//                    case 2:
+//                        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_gray));
+//                        textView.setTextColor(getResources().getColor(R.color.gray));
+//                        break;
 
-                    case 3:
+                    case 2:
                         image.setImageDrawable(getResources().getDrawable(R.drawable.ic_saved_gray));
                         textView.setTextColor(getResources().getColor(R.color.gray));
                         break;

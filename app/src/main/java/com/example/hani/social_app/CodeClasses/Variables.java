@@ -37,10 +37,14 @@ public class Variables {
     public static String LoginApi = BASEURL + "/api/login";
     public static String SignUpApi = BASEURL + "api/registerUser";
     public static String SavedNewsAPI = BASEURL + "api/showFavouriteNews";
-    public static String ShowsNewsAPI = BASEURL +  "api/showNews";
+    public static String ShowsNewsAPI = BASEURL +  "api/showSectionNews";
     public static String News_detail= BASEURL + "api/showNewsDetail";
     public static String NewsCategories = BASEURL + "api/showCategories";
     public static String AddFavouriteNews = BASEURL + "api/AddFavouriteNews";
+
+    public static String Slider_News_API = BASEURL + "api/showSliderNews";
+   // http://bringthings.com/news/
+    public static String Sections_News_API = BASEURL + "api/showSectionNews";
 
 
     public static IResult mResultCallback = null;
@@ -104,7 +108,7 @@ public class Variables {
 
         // New Code
         // TODO: 3/5/2019
-     //  avail = true;
+       avail = true;
         return avail;
 
     }
