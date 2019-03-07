@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.hani.social_app.Category.CategoryModel.CategoryModel;
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
 import com.example.hani.social_app.TopNews.Discover_Adapter_two;
 import com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder> {
@@ -76,6 +78,10 @@ public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder
         this.News_List_adapter=news_List;
     }
 
+    public void updateList(ArrayList<NewsDataMode> list){
+        News_List_adapter = list;
+        notifyDataSetChanged();
+    }
 
     @SuppressLint("ResourceAsColor")
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {

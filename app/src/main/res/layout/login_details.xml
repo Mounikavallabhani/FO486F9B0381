@@ -8,7 +8,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#50000000"
+
         android:id="@+id/login_details_view_id"
         />
 
@@ -58,8 +58,10 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:id="@+id/button_sign_up"
                 android:background="@android:color/transparent"
                 android:text="Sign Up with Email"
+
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 />

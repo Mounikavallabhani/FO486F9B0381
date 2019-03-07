@@ -1,33 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_below="@+id/login_back_IV_id"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:clickable="true"
+    android:id="@+id/loading_layou"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:adjustViewBounds="true"
-        android:cropToPadding="true"
-        android:layout_centerInParent="true"
-        android:scaleType="centerInside"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+
+        android:id="@+id/login_details_view_id"
         />
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:id="@+id/loading"
-        android:layout_alignParentBottom="true"
-        android:adjustViewBounds="true"
-        android:cropToPadding="true"
-        android:scaleType="centerInside"
-        android:text="Loading"
-        android:textAlignment="center" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/login_details_view_id"
+        android:background="@drawable/layout_round_corner">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/login_details_cross_IV_id"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_cross"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/circle_image"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/login_details_TV1_id"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/circle_background"
+            android:src="@drawable/ic_profile_gray" />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_RL2_id"
+            android:layout_below="@+id/circle_image"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_details_RL2_TV2_id"
+                android:text="Name"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                />
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:id="@+id/login_details_RL2_TV1_id"-->
+                <!--android:background="@color/light_gray"-->
+                <!--android:layout_toLeftOf="@+id/login_details_RL2_TV2_id"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:id="@+id/login_details_RL2_TV3_id"-->
+                <!--android:background="@color/light_gray"-->
+                <!--android:layout_toRightOf="@+id/login_details_RL2_TV2_id"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--/>-->
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_details_RL3_id"
+            android:layout_below="@+id/login_details_RL2_id"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp">
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_details_scrollview_id"
+                android:layout_centerHorizontal="true"
+                android:scrollbars="none"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.CardView
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/card_view"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        card_view:cardElevation="50dp"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content"
+                        card_view:cardCornerRadius="4dp">
+
+                        <TextView
+                            android:id="@+id/email_text"
+                            android:text="Usama Daood"
+                            android:layout_margin="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </android.support.v7.widget.CardView>
+
+
+
+
+                </RelativeLayout>
+
+
+            </HorizontalScrollView>
+
+
+
+
+        </RelativeLayout>
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/login_details_TV2_id"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:paddingTop="15dp"-->
+            <!--android:layout_below="@+id/login_details_RL3_id"-->
+            <!--android:text="By signing up, you confirm that you agree to our \n Terms of Use and have read and understood \n our Privacy Policy."-->
+            <!--android:textAlignment="center"-->
+            <!--/>-->
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/login_details_RL4_id"
+            android:layout_alignParentBottom="true"
+            >
+
+
+
+            <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:id="@+id/login_details_RKL_id"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_below="@+id/login_details_RL3_id"
+                app:corner_radius="2dp"
+                android:background="@color/blue">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/button_sign_up"
+                    android:background="@android:color/transparent"
+                    android:text="Logout"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    />
+
+            </com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout>
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

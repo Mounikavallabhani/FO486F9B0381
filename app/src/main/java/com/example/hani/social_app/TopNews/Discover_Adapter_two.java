@@ -76,8 +76,22 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        // New Code
+//        NewsDataMode News = News_List_adapter.get(i);
+        //        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+//        if (viewGroup == VIEW_TYPE_HEADER) {
+//            v = inflater.inflate(R.layout.header, parent, false);
+//            return new VHHeader(view);
+//        } else if (viewType == VIEW_TYPE_ITEM) {
+//            view = inflater.inflate(R.layout.item, parent, false);
+//            return new VHItem(view);
+//        }
+
+        // End New Code
+
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.discover_item_rl2,null);
         return new ViewHolder(v);
+
     }
 
 
@@ -86,21 +100,20 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
             viewHolder.imageView.setClipToOutline(true);
             viewHolder.RL.setClipToOutline(true);
         }
+
         NewsDataMode News = News_List_adapter.get(i);
-
-
       //  viewHolder.imageView.setImageResource(img[i]);
-
         Picasso.get()
-                .load(News.getImage_url())
+                .load(News.getImage_url()).fit()
+                .centerCrop()
                 .placeholder(R.mipmap.ic_dnews)
                 .error(R.mipmap.ic_dnews)
                 .into(viewHolder.imageView);
 
+        viewHolder.news_section.setText(""+News.getCategory());
         viewHolder.textView.setText(News.getTitle());
         viewHolder.textView1.setText(News.getCategory());
         viewHolder.textView1.setTextColor(text2[i]);
-
         viewHolder.onbind(i,itemclick);
     }
 
@@ -114,12 +127,13 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
         ImageView imageView;
         TextView textView,textView1;
         RelativeLayout RL;
+        TextView news_section;
         android.support.v4.app.FragmentManager FM;
         android.support.v4.app.FragmentTransaction FT;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            news_section = itemView.findViewById(R.id.news_section);
             imageView = (ImageView) itemView.findViewById(R.id.discover_rl_2_item_IV_id);
             textView = (TextView) itemView.findViewById(R.id.discover_rl_2_item_TV1_id);
             textView1 = (TextView) itemView.findViewById(R.id.discover_rl_2_item_TV2_id);

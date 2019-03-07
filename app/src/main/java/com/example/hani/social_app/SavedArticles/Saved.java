@@ -7,15 +7,19 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.example.hani.social_app.Category.CategoryModel.CategoryModel;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.SharedPref.SharedPrefrence;
@@ -43,6 +47,7 @@ public class Saved extends Fragment {
     private List<NewsDataMode> News_List;
     private String TAG = "Saved";
     boolean is_wifi_availeable;
+    EditText save_search;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +57,18 @@ public class Saved extends Fragment {
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
+
+        save_search = view.findViewById(R.id.saved_search_ET_id);
+        save_search.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+        });
         is_wifi_availeable=Variables.is_internet_avail(getContext());
         RV = (RecyclerView) view.findViewById(R.id.saved_RV_id);
         News_List = new ArrayList<>();
@@ -67,6 +84,22 @@ public class Saved extends Fragment {
         return view;
 
     }
+
+    void filter(String text){
+        List<NewsDataMode> temp = new ArrayList();
+        for(NewsDataMode d: News_List){
+
+            if(d.getDescription().toLowerCase().contains(text.toLowerCase())
+                    ||
+            d.getTitle().toLowerCase().contains(text.toLowerCase()))
+            {
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        adapter.updateList((ArrayList<NewsDataMode>) temp);
+    }
+
 
 
     public void get_category_date_offline(){

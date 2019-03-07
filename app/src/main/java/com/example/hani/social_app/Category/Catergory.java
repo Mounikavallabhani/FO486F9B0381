@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -37,6 +40,7 @@ public class Catergory extends Fragment {
     View view;
     RecyclerView recyclerView;
     Category_Adapter adapter;
+    EditText search_pad;
 
     // Define List
     private List<CategoryModel> Category_List;
@@ -51,6 +55,19 @@ public class Catergory extends Fragment {
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
+        search_pad = view.findViewById(R.id.category_search_ET_id);
+
+        search_pad.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+        });
+
         Category_List = new ArrayList<>();
         is_wifi_availeable=Variables.is_internet_avail(getContext());
 
@@ -78,6 +95,20 @@ public class Catergory extends Fragment {
         return view;
     }
 
+
+    void filter(String text){
+        List<CategoryModel> temp = new ArrayList();
+
+        for(CategoryModel d: Category_List){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(d.getName().toLowerCase().contains(text.toLowerCase())){
+                temp.add(d);
+            }
+        }
+        //update recyclerview
+        adapter.updateList((ArrayList<CategoryModel>) temp);
+    }
 
     public void get_category_date_offline(){
 
