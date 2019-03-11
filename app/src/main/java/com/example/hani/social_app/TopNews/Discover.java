@@ -30,6 +30,8 @@ import com.example.hani.social_app.MainActivity;
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.SharedPref.SharedPrefrence;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
+import com.example.hani.social_app.TopNews.DataModels.News_Section_Model;
+import com.example.hani.social_app.TopNews.DataModels.Sliders_data_model;
 import com.example.hani.social_app.TopNews.LoginSignup.Already_Login_f;
 import com.example.hani.social_app.TopNews.LoginSignup.Login_details;
 import com.example.hani.social_app.TopNews.NewsDetail_f.NewsDetail_F;
@@ -61,10 +63,16 @@ public class Discover extends Fragment implements View.OnClickListener {
     VolleyService mVolleyService;
     String User_info_json;
     private List<NewsDataMode> News_List;
+    private List<Sliders_data_model> Slider_List;
+
     private ProgressDialog pDialog;
     TextView current_date;
     RelativeLayout main_lauout;
     FrameLayout dim_area;
+    int section_id_api;
+    private List<News_Section_Model> News_section_List;
+
+   // ArrayList<Integer> Section_ids = new ArrayList<Integer>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -72,7 +80,7 @@ public class Discover extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.discover, container, false);
         init();
         main_lauout = view.findViewById(R.id.bac_dim_layout);
-
+        News_section_List = new ArrayList<>();
         pDialog = new ProgressDialog(getContext());
         pDialog.setMessage(getResources().getString(R.string.loading_text));
         pDialog.setCancelable(false);
@@ -143,7 +151,7 @@ public class Discover extends Fragment implements View.OnClickListener {
                         //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
 
                     }
-                },News_List);
+                },News_List,getContext());
                 GridLayoutManager GLM = new GridLayoutManager(getContext(),2);
                 RV2.setLayoutManager(GLM);
                 RV2.setAdapter(adapter2);
@@ -173,6 +181,7 @@ public class Discover extends Fragment implements View.OnClickListener {
 
         RV2.setNestedScrollingEnabled(false);
         News_List = new ArrayList<>();
+        Slider_List = new ArrayList<>();
         LL = (RelativeLayout) view.findViewById(R.id.discover_LL_id);
         ViewGroup.LayoutParams lp = LL.getLayoutParams();
         lp.height = (int) (Variables.height * 0.6);
@@ -292,29 +301,23 @@ public class Discover extends Fragment implements View.OnClickListener {
                 SharedPrefrence.save_response_share(getContext(),response.toString(),SharedPrefrence.shared_discover_news_key);
                 //Variables.toast_msg(getContext(),""+response);
                     try{
-
-
-                    JSONArray Arr= response.getJSONArray("msg");
-                      for(int i=0; i< Arr.length(); i++){
-                          JSONObject news_obj= Arr.getJSONObject(i);
+                    JSONArray Arr_1= response.getJSONArray("msg");
+                      for(int i=0; i< Arr_1.length(); i++){
+                          JSONObject news_obj= Arr_1.getJSONObject(i);
                           JSONObject News = news_obj.getJSONObject("News");
                           News.getString("title");
                           News.getInt("id");
                          // News.getInt("favourite");
 //                          JSONObject category_obj = news_obj.getJSONObject("Category");
 //                          category_obj.getString("name");
-
-                          NewsDataMode a = new NewsDataMode(
+                          Sliders_data_model a = new Sliders_data_model(
                                   News.getString("attachment")
                                   ,News.getString("title"),
-                                  News.getString("description"),
-                                 "",
-                                  News.getInt("id"),
-                                 0
-
+                                  News.getString("description")
                                   );
-                          News_List.add(a);
+                          Slider_List.add(a);
                        }
+
 
                        /// ==> Slider Adapters
 
@@ -322,17 +325,17 @@ public class Discover extends Fragment implements View.OnClickListener {
                         @Override
                         public void clickAction(int pos) {
                             //   News_List.get(pos);
-                            NewsDataMode News = News_List.get(pos);
+                            Sliders_data_model News = Slider_List.get(pos);
                             Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
-                            myIntent.putExtra("news_id",  News.getId());
-                            myIntent.putExtra("like_or_dislike",  News.getLike_dislile());
+//                            myIntent.putExtra("news_id",  News.getId());
+//                            myIntent.putExtra("like_or_dislike",  News.getLike_dislile());
                             //Optional parameters
                             getContext().startActivity(myIntent);
-                            Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
                             //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
 
                         }
-                    },News_List);
+                    },Slider_List,getContext());
 //        adapter2 = new Discover_Adapter_two(new Discover_Adapter_two.onClick() {
 //            @Override
 //            public void clickAction(int pos) {
@@ -342,7 +345,8 @@ public class Discover extends Fragment implements View.OnClickListener {
 //            }
 //        },News_List);
 
-                    LinearLayoutManager LLM = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+                        LinearLayoutManager LLM = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                     RV1.setLayoutManager(LLM);
                     RV1.setAdapter(adapter1);
 
@@ -397,9 +401,7 @@ public class Discover extends Fragment implements View.OnClickListener {
         };
     }
     // ENd Data From API
-
     // ======= Display Sections News
-
     // Get Data From API
     public void Get_Sections_News(){
 
@@ -424,39 +426,120 @@ public class Discover extends Fragment implements View.OnClickListener {
             @Override
             public void notifySuccess(String requestType, JSONObject response) {
                 Variables.hidepDialog(pDialog);
-             //  Variables.Log_d_msg(getContext()," res "+response);
+
+
+                // News_List.clear();
+               // int section_id_api;
+
+
+               Variables.Log_d_msg(getContext()," res "+response);
                // SharedPrefrence.save_response_share(getContext(),response.toString(),SharedPrefrence.shared_discover_news_key);
                // Variables.toast_msg(getContext(),""+response);
+
                 try{
                     JSONArray Arr= response.getJSONArray("msg");
+                    //Arr.length()
+                            Variables.toast_msg(getContext(),"Size "+Arr.length());
+                    NewsDataMode add;
                     for(int i=0; i< Arr.length(); i++){
                         JSONObject news_obj_section= Arr.getJSONObject(i);
                         // Get News Sections
                         JSONObject News_Sections = news_obj_section.getJSONObject("Section");
                         News_Sections.getString("name");
                         News_Sections.getInt("s_order");
-                        // End Get News Sections..
+                        section_id_api = News_Sections.getInt("id");
+
+//                        if(Section_ids.contains(section_id_api)){
+//
+//                        }else{
+//                            Section_ids.add(section_id_api);
+//                        }
+
+
+///                         End Get News Sections..
                         JSONArray section_news = news_obj_section.getJSONArray("SectionNews");
-                            for(int a=0; a < section_news.length(); a++){
-                                JSONObject news_obj = section_news.getJSONObject(a);
-                                JSONObject news_detail_obj = news_obj.getJSONObject("News");
-                                news_detail_obj.getString("description");
-                                news_detail_obj.getString("attachment");
-                                news_detail_obj.getString("title");
+//                                 for(int a = 0; a < section_news.length(); a++){
+//                                JSONObject news_obj = section_news.getJSONObject(a);
+//                                JSONObject news = news_obj.getJSONObject("News");
+//                                news.getString("title");
+//                                news.getString("attachment");
+//                                list_News_title.add(""+news.getString("title"));
+//                                list_News_img_urls.add(""+news.getString("attachment"));
+//                        }
 
+//                        JSONArray get_news= News.getNews_array();
 
-                                NewsDataMode add = new NewsDataMode(
-                                        news_detail_obj.getString("attachment")
-                                        ,news_detail_obj.getString("title"),
-                                        news_detail_obj.getString("description"),
-                                        ""+News_Sections.getString("name"),
-                                        news_detail_obj.getInt("id"),
-                                        0
-                                );
-                                News_List.add(add);
+//                        try{
+//                            for(int a = 0; a < section_news.length(); a++){
+//                                JSONObject news_obj = section_news.getJSONObject(a);
+//                                JSONObject news = news_obj.getJSONObject("News");
+//                                news.getString("title");
+//                                news.getString("attachment");
+//                                // list_News_title.add(""+news.getString("title"));
+//                                //list_News_img_urls.add(""+news.getString("attachment"));
+//
+//                                News_Section_Model add = new News_Section_Model(news.getString("attachment")
+//                                        ,news.getString("title")
+//
+//                                );
+//                                News_section_List.add(add);
+//
+//
+//                            }
+//
+//                        }catch (Exception v){
+////                            Variables.Log_d_msg(context,""+list_News_title);
+//                        }
 
-                                //Variables.toast_msg(getContext(),""+news_detail_obj.getString("description"));
-                            }
+                                    // Add header only First item
+                                    add = new NewsDataMode(
+                                            News_Sections.getString("name")
+                                            ,section_news
+                                    );
+
+                        News_List.add(add);
+                       //Variables.toast_msg(getContext(),""+list_News_title+" "+list_News_img_urls);
+
+//                            for(int a=0; a < section_news.length() ; a++){
+//                                JSONObject news_obj = section_news.getJSONObject(a);
+//                                JSONObject news_detail_obj = news_obj.getJSONObject("News");
+//                                news_detail_obj.getString("description");
+//                                news_detail_obj.getString("attachment");
+//                                news_detail_obj.getString("title");
+//
+//                                NewsDataMode add;
+//                                if(a==0){
+//                                    // Add header only First item
+//                                    add = new NewsDataMode(
+//                                            news_detail_obj.getString("attachment")
+//                                            ,news_detail_obj.getString("title"),
+//                                            news_detail_obj.getString("description"),
+//                                            ""+News_Sections.getString("name"),
+//                                            news_detail_obj.getInt("id"),
+//                                            a,
+//                                            i
+//                                    );
+//
+//                                }else{
+//                                    // Remaining items has not section .
+//                                    add = new NewsDataMode(
+//                                            news_detail_obj.getString("attachment")
+//                                            ,news_detail_obj.getString("title"),
+//                                            news_detail_obj.getString("description"),
+//                                            ""+News_Sections.getString("name"),
+//                                            news_detail_obj.getInt("id"),
+//                                            a,
+//                                            i
+//                                    );
+//
+//                                }
+//
+//
+//                                News_List.add(add);
+//
+//                                //Variables.toast_msg(getContext(),""+news_detail_obj.getString("description"));
+//                            }
+
 
                     }
 
@@ -483,19 +566,27 @@ public class Discover extends Fragment implements View.OnClickListener {
                         public void clickAction(int pos) {
                          //   News_List.get(pos);
                             NewsDataMode News = News_List.get(pos);
-                            Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
-                            myIntent.putExtra("news_id",  News.getId());
-                            myIntent.putExtra("like_or_dislike",  News.getLike_dislile());
-                            //Optional parameters
-                            getContext().startActivity(myIntent);
+//                            Intent myIntent = new Intent(getContext(), NewsDetail_F.class);
+//                            myIntent.putExtra("news_id",  News.getId());
+//                            myIntent.putExtra("like_or_dislike",  News.getLike_dislile());
+//                            //Optional parameters
+//                            getContext().startActivity(myIntent);
                             Toast.makeText(getContext(), ""+News.getId(), Toast.LENGTH_SHORT).show();
                             //                            startActivity(new Intent(getContext(), NewsDetail_F.class));
 
                         }
-                    },News_List);
-                    GridLayoutManager GLM = new GridLayoutManager(getContext(),2);
+                    },News_List,getContext());
+
+                    final GridLayoutManager GLM = new GridLayoutManager(getContext(),1);
+
                     RV2.setLayoutManager(GLM);
                     RV2.setAdapter(adapter2);
+                    try{
+
+
+                    }catch (Exception v){
+
+                    }
 
                 }catch (Exception v){
                     Variables.hidepDialog(pDialog);

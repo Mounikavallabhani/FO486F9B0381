@@ -139,7 +139,7 @@ public class Catergory extends Fragment {
                     startActivity(new Intent(getContext(), NewsDetail_F.class));
 
                 }
-            },Category_List);
+            },Category_List,getContext());
 
             recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
             recyclerView.setAdapter(adapter);
@@ -227,7 +227,7 @@ public class Catergory extends Fragment {
                             startActivity(new Intent(getContext(), NewsDetail_F.class));
 
                         }
-                    },Category_List);
+                    },Category_List,getContext());
 
                     recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     recyclerView.setAdapter(adapter);

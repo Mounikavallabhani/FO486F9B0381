@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.example.hani.social_app.CodeClasses.Variables;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class SharedPrefrence {
@@ -42,5 +43,23 @@ public class SharedPrefrence {
 
     }
 
+    public static int get_user_id_from_json(Context context){
+        String user_json = get_offline(context,shared_user_login_detail_key);
+        // Get User Data from
+        int user_id = 0;
+        try{
+            JSONObject response = new JSONObject(user_json);
+            JSONObject Arr = response.getJSONObject("msg");
+            JSONObject user = Arr.getJSONObject("User");
+           user.getString("first_name");
+           user.getString("email");
+           user_id = user.getInt("id");
+
+        }catch (Exception b){
+
+        }
+
+            return user_id;
+    }
 
 }

@@ -1,5 +1,9 @@
 package com.example.hani.social_app.TopNews.DataModels;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+
 public class NewsDataMode {
     String title;
     String description;
@@ -7,7 +11,52 @@ public class NewsDataMode {
     String category;
     int id;
     int like_dislile;
-    public NewsDataMode(String imageUrl, String title, String description,String category,int id) {
+    int is_section;
+    JSONArray news_array;
+    String Section_title;
+    ArrayList<String> News_title_list, News_img_url;
+
+    public ArrayList<String> getNews_title_list() {
+        return News_title_list;
+    }
+
+    public void setNews_title_list(ArrayList<String> news_title_list) {
+        News_title_list = news_title_list;
+    }
+
+    public ArrayList<String> getNews_img_url() {
+        return News_img_url;
+    }
+
+    public void setNews_img_url(ArrayList<String> news_img_url) {
+        News_img_url = news_img_url;
+    }
+
+    public JSONArray getNews_array() {
+        return news_array;
+    }
+
+    public void setNews_array(JSONArray news_array) {
+        this.news_array = news_array;
+    }
+
+    public String getSection_title() {
+        return Section_title;
+    }
+
+    public void setSection_title(String section_title) {
+        Section_title = section_title;
+    }
+
+    public int getIs_section() {
+        return is_section;
+    }
+
+    public void setIs_section(int is_section) {
+        this.is_section = is_section;
+    }
+
+    public NewsDataMode(String imageUrl, String title, String description, String category, int id) {
         this.image_url = imageUrl;
         this.title = title;
         this.description = description;
@@ -22,6 +71,17 @@ public class NewsDataMode {
         this.category=category;
         this.id=id;
         this.like_dislile=like_dislile;
+    }
+
+    public NewsDataMode(String Section_title, ArrayList<String> News_title_list,ArrayList<String> News_imag_url) {
+        this.Section_title = Section_title;
+        this.News_title_list = News_title_list;
+        this.News_img_url= News_imag_url;
+    }
+
+    public NewsDataMode(String Section_title, JSONArray array) {
+        this.Section_title = Section_title;
+        this.news_array= array;
     }
 
     public int getLike_dislile() {

@@ -159,7 +159,7 @@ public class Saved extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Variables.mVolleyService.postDataVolley("POSTCALL", Variables.ShowsNewsAPI, sendObj);
+        Variables.mVolleyService.postDataVolley("POSTCALL", Variables.SavedNewsAPI, sendObj);
 
     }
     // Initialize Interface Call Backs
@@ -185,12 +185,12 @@ public class Saved extends Fragment {
                         JSONObject News = news_obj.getJSONObject("News");
                         News.getString("title");
                       //  News.getString("id");
-                        JSONObject category_obj = news_obj.getJSONObject("Category");
-                        category_obj.getString("name");
+//                        JSONObject category_obj = news_obj.getJSONObject("Category");
+//                        category_obj.getString("name");
                         NewsDataMode a = new NewsDataMode(News.getString("attachment")
                                 ,News.getString("title"),
                                 News.getString("description"),
-                                category_obj.getString("name"),
+                                "",
                                 News.getInt("id")
                         );
                         News_List.add(a);

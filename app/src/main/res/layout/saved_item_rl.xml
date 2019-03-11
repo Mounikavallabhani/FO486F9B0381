@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Festival"
+                android:text=""
                 android:id="@+id/item_recyclerview_2_TV1_id"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"

@@ -98,8 +98,8 @@ public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder
 
 //        viewHolder.imageView.setImageResource(img[i]);
         viewHolder.textView.setText(News.getTitle());
-        viewHolder.textView1.setText(text2[i]);
-        viewHolder.RKL.setBackgroundResource(text1[i]);
+      //  viewHolder.textView1.setText(text2[i]);
+//        viewHolder.RKL.setBackgroundResource(text1[i]);
 
     }
 

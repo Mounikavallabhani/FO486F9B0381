@@ -33,7 +33,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="300dp"
                     android:id="@+id/discover_LL_id"
                     >
 
@@ -96,7 +96,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/startup_id"
-                            android:text="STARTUPS"
+                            android:text=""
+                            android:visibility="gone"
                             android:textColor="@color/blue"
                             android:layout_marginLeft="20dp"
                             android:layout_above="@+id/title_id"
@@ -108,7 +109,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/title_id"
-                            android:text="Top startups that are changing the way we travel"
+                            android:text=""
+                            android:visibility="gone"
                             android:textSize="22dp"
                             android:textStyle="bold"
                             android:textColor="@color/black"
@@ -139,29 +141,7 @@
 
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/discover_RL2_TV_id"
-                        android:text="Recent News"
-                        android:textSize="22dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:paddingTop="8dp"
-                        android:layout_alignParentBottom="true"
-                        />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/discover_RL2_TV1_id"
-                        android:text="See All"
-                        android:textSize="16dp"
-                        android:textColor="@color/blue"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:paddingTop="8dp"
-                        />
 
                 </RelativeLayout>
 
@@ -171,8 +151,8 @@
                     android:id="@+id/discover_RL2_RV2_id"
                     android:layout_below="@+id/discover_RL3_id"
                     android:paddingTop="5dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
                     >
 
 
