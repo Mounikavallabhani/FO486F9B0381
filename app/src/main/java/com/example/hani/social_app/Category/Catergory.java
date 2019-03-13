@@ -156,7 +156,6 @@ public class Catergory extends Fragment {
     // Get Data From API
     public void Get_Categories(){
         Variables.showpDialog(pDialog);
-
         initVolleyCallback();
 
         Variables.mVolleyService = new VolleyService(Variables.mResultCallback,getContext());

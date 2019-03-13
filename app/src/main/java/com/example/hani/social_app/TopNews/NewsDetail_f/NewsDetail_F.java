@@ -2,9 +2,11 @@ package com.example.hani.social_app.TopNews.NewsDetail_f;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -74,6 +76,19 @@ public class NewsDetail_F extends AppCompatActivity {
             like_button.setVisibility(View.VISIBLE);
         }
 
+        final View parent = (View) IV.getParent();  // button: the view you want to enlarge hit area
+        parent.post( new Runnable() {
+            public void run() {
+                final Rect rect = new Rect();
+                IV.getHitRect(rect);
+                rect.top -= 100;    // increase top hit area
+                rect.left -= 100;   // increase left hit area
+                rect.bottom += 100; // increase bottom hit area
+                rect.right += 100;  // increase right hit area
+                parent.setTouchDelegate( new TouchDelegate( rect , IV));
+            }
+        });
+
         IV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +102,7 @@ public class NewsDetail_F extends AppCompatActivity {
 
     // Get Data From API
     public void Get_Saved_News(int news_id){
-        Variables.toast_msg(this,"Inside Method "+news_id);
+       // Variables.toast_msg(this,"Inside Method "+news_id);
         initVolleyCallback();
 
         mVolleyService = new VolleyService(mResultCallback,NewsDetail_F.this);
@@ -141,7 +156,7 @@ public class NewsDetail_F extends AppCompatActivity {
 
     public void Like_News(int like,int news_id)
     {
-        Variables.toast_msg(this,"Inside like Method "+News_id);
+        //Variables.toast_msg(this,"Inside like Method "+News_id);
         Variables.showpDialog(pDialog);
         initVolleyCallback_for_like_news();
 
@@ -261,13 +276,58 @@ public class NewsDetail_F extends AppCompatActivity {
 
     /// ===> Method for increaing the font size
     public void increase_font_size(View size){
-        if(num_of_click_for_font_size==4){
-            num_of_click_for_font_size=0;
-        }
-        num_of_click_for_font_size = num_of_click_for_font_size+1;
-        Variables.toast_msg(NewsDetail_F.this,"Num of Click "+num_of_click_for_font_size);
-        Variables.increase_font_size(num_of_click_for_font_size,title,description);
+
+        float px = title.getTextSize();
+        float desc_px = description.getTextSize();
+
+        float sp = px / getResources().getDisplayMetrics().scaledDensity;
+        float desc_sp = desc_px / getResources().getDisplayMetrics().scaledDensity;
+
+        Variables.toast_msg(NewsDetail_F.this,"Size in SP "+sp);
+//
+//        if(num_of_click_for_font_size==4){
+//            num_of_click_for_font_size=0;
+//        }
+
+//        num_of_click_for_font_size = num_of_click_for_font_size+1;
+       // Variables.toast_msg(NewsDetail_F.this,"Num of Click "+num_of_click_for_font_size);
+        Variables.increase_font_size(sp,desc_sp,title,description);
+
+//        int title_text = (int) title.getTextSize();
+//        int desc_text = (int) description.getTextSize();
+//        Variables.toast_msg(NewsDetail_F.this,""+title_text);
+//        // description.getTextSize();
+//        Variables.increase_font_size(title_text,desc_text,title,description);
+
 
     }
+
+
+    public void decrease_font_size(View decrease){
+//      int title_text = (int) title.getTextSize();
+//        int desc_text = (int) description.getTextSize();
+//     // description.getTextSize();
+//        Variables.descrease_font_size(title_text,desc_text,title,description);
+
+        float px = title.getTextSize();
+        float desc_px = description.getTextSize();
+
+        float sp = px / getResources().getDisplayMetrics().scaledDensity;
+        float desc_sp = desc_px / getResources().getDisplayMetrics().scaledDensity;
+
+        Variables.toast_msg(NewsDetail_F.this,"Size in SP "+sp);
+//
+//        if(num_of_click_for_font_size==4){
+//            num_of_click_for_font_size=0;
+//        }
+
+//        num_of_click_for_font_size = num_of_click_for_font_size+1;
+        // Variables.toast_msg(NewsDetail_F.this,"Num of Click "+num_of_click_for_font_size);
+        Variables.descrease_font_size(sp,desc_sp,title,description);
+
+
+    }
+
+
 
 }

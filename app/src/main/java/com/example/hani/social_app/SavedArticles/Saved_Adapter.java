@@ -1,6 +1,7 @@
 package com.example.hani.social_app.SavedArticles;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder> {
 
@@ -98,8 +100,13 @@ public class Saved_Adapter extends RecyclerView.Adapter<Saved_Adapter.ViewHolder
 
 //        viewHolder.imageView.setImageResource(img[i]);
         viewHolder.textView.setText(News.getTitle());
-      //  viewHolder.textView1.setText(text2[i]);
-//        viewHolder.RKL.setBackgroundResource(text1[i]);
+        viewHolder.textView1.setText(News.getCategory());
+
+        Random rnd = new Random();
+        int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+       // view.setBackgroundColor(color);
+
+        viewHolder.RKL.setBackgroundColor(color);
 
     }
 

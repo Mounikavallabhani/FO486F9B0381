@@ -60,7 +60,7 @@ public class ItemRecyclerViewAdapter_title extends RecyclerView.Adapter<ItemRecy
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Recycle Click " + position+" Like "+News.getIs_like_dis_like()+" ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "Recycle Click " + position+" Like "+News.getIs_like_dis_like()+" ", Toast.LENGTH_SHORT).show();
 
                 Intent myIntent = new Intent(view.getContext(), NewsDetail_F.class);
                 myIntent.putExtra("news_id",  News.getNews_id());

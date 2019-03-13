@@ -4,12 +4,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class View_pager_Adapter extends FragmentPagerAdapter {
-
+    private boolean enabled;
     private final List<Fragment> fragmentList = new ArrayList<>();
     private final List<String> fragmenttitlelist = new ArrayList<>();
 
@@ -21,6 +22,14 @@ public class View_pager_Adapter extends FragmentPagerAdapter {
     public android.support.v4.app.Fragment getItem(int position) {
         return fragmentList.get(position);
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        if (this.enabled) {
+//            return super.onTouchEvent(event);
+//        }
+//        return false;
+//    }
 
     @Override
     public int getCount() {

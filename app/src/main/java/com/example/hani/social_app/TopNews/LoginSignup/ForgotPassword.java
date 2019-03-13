@@ -2,12 +2,14 @@ package com.example.hani.social_app.TopNews.LoginSignup;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,6 +53,19 @@ public class ForgotPassword extends AppCompatActivity {
         Spannable wordtoSpan = new SpannableString(" Go to Help Center.");
         wordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 6, 18, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 //        TV.setText(wordtoSpan);
+
+        final View parent = (View) IV.getParent();  // button: the view you want to enlarge hit area
+        parent.post( new Runnable() {
+            public void run() {
+                final Rect rect = new Rect();
+                IV.getHitRect(rect);
+                rect.top -= 100;    // increase top hit area
+                rect.left -= 100;   // increase left hit area
+                rect.bottom += 100; // increase bottom hit area
+                rect.right += 100;  // increase right hit area
+                parent.setTouchDelegate( new TouchDelegate( rect , IV));
+            }
+        });
 
         IV.setOnClickListener(new View.OnClickListener() {
             @Override

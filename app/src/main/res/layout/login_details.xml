@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:clickable="true"
+    android:background="@drawable/bg_round"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="200dp"
-
+        android:visibility="gone"
         android:id="@+id/login_details_view_id"
         />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/login_details_RL1_id"
         android:layout_below="@+id/login_details_view_id"
         android:background="@drawable/layout_round_corner"
@@ -134,19 +135,80 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                <!--<ImageView-->
+                    <!--android:layout_width="48dp"-->
+                    <!--android:layout_height="48dp"-->
+                    <!--android:id="@+id/login_details_fb_iV_id"-->
+                    <!--android:src="@drawable/ic_facebook"-->
+                    <!--android:padding="2dp"-->
+                    <!--/>-->
+
+                <FrameLayout
+                    android:id="@+id/FrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+
+                <com.facebook.login.widget.LoginButton
+                    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                    facebook:com_facebook_login_text=""
+                    android:layout_height="60dp"
                     android:id="@+id/login_details_fb_iV_id"
-                    android:src="@drawable/ic_facebook"
                     android:padding="2dp"
-                    />
+                    android:visibility="gone"
+                    android:background="@drawable/ic_facebook"
+                    android:layout_margin="10dp"
+                    android:layout_width="30dp" />
+
+
+                    <ImageView
+                        android:id="@+id/fb"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+
+                        android:src="@drawable/ic_facebook"
+                        android:text="Google Login"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/FrameLayout2"
+                    android:layout_toRightOf="@+id/FrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/sign_in_button"
+                    android:layout_marginLeft="10dp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/google"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+
+                        android:onClick="onClick"
+                        android:src="@drawable/ic_goggle"
+                        android:text="Google Login"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                </FrameLayout>
 
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:id="@+id/login_details_goggle_iV_id"
                     android:src="@drawable/ic_goggle"
+                    android:visibility="gone"
                     android:layout_toRightOf="@+id/login_details_fb_iV_id"
                     android:layout_marginLeft="10dp"
                     android:padding="2dp"
@@ -179,41 +241,66 @@
             android:textAlignment="center"
             />
 
+                <RelativeLayout
+            android:layout_width="wrap_content"
+                    android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+            android:layout_below="@+id/login_details_TV2_id"
+            android:layout_centerInParent="true">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:id="@+id/login_details_RL4_id"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/up_line_border"
-            >
-
-            <RelativeLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:id="@+id/login_details_RL3_TV1_id"
+                android:text="Already have an account?"
+                />
 
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/login_details_RL3_TV1_id"
-                    android:text="Already have an account?"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/login_details_RL3_TV2_id"
-                    android:text=" Login."
-                    android:textColor="@color/blue"
-                    android:layout_toRightOf="@+id/login_details_RL3_TV1_id"
-                    />
-
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/login_details_RL3_TV2_id"
+                android:text=" Login."
+                android:textColor="@color/blue"
+                android:layout_toRightOf="@+id/login_details_RL3_TV1_id"
+                />
 
         </RelativeLayout>
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:id="@+id/login_details_RL4_id"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="@drawable/up_line_border"-->
+            <!--&gt;-->
+
+            <!--&lt;!&ndash;<RelativeLayout&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_centerInParent="true">&ndash;&gt;-->
+
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/login_details_RL3_TV1_id"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="Already have an account?"&ndash;&gt;-->
+                    <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:id="@+id/login_details_RL3_TV2_id"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text=" Login."&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textColor="@color/blue"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_toRightOf="@+id/login_details_RL3_TV1_id"&ndash;&gt;-->
+                    <!--&lt;!&ndash;/>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</RelativeLayout>&ndash;&gt;-->
+
+        <!--</RelativeLayout>-->
 
     </RelativeLayout>
 

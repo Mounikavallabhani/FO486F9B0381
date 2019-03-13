@@ -183,6 +183,8 @@ public class Saved extends Fragment {
                     for(int i=0;i< Arr.length();i++){
                         JSONObject news_obj= Arr.getJSONObject(i);
                         JSONObject News = news_obj.getJSONObject("News");
+                        JSONObject cate = News.getJSONObject("Category");
+                        cate.getString("name");
                         News.getString("title");
                       //  News.getString("id");
 //                        JSONObject category_obj = news_obj.getJSONObject("Category");
@@ -190,7 +192,7 @@ public class Saved extends Fragment {
                         NewsDataMode a = new NewsDataMode(News.getString("attachment")
                                 ,News.getString("title"),
                                 News.getString("description"),
-                                "",
+                                cate.getString("name"),
                                 News.getInt("id")
                         );
                         News_List.add(a);

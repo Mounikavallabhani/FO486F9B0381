@@ -3,10 +3,14 @@ package com.example.hani.social_app.TopNews;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
@@ -37,6 +41,7 @@ import com.example.hani.social_app.TopNews.LoginSignup.Login_details;
 import com.example.hani.social_app.TopNews.NewsDetail_f.NewsDetail_F;
 import com.example.hani.social_app.VolleyReq.IResult;
 import com.example.hani.social_app.VolleyReq.VolleyService;
+//import com.viewpagerindicator.CirclePageIndicator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,7 +52,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Discover extends Fragment implements View.OnClickListener {
     View view;
@@ -71,6 +79,13 @@ public class Discover extends Fragment implements View.OnClickListener {
     FrameLayout dim_area;
     int section_id_api;
     private List<News_Section_Model> News_section_List;
+
+    private static ViewPager mPager;
+    private static int currentPage = 0;
+    private static int NUM_PAGES = 0;
+    private static final Integer[] IMAGES= {R.drawable.aaa,R.drawable.aaa,R.drawable.aaa,R.drawable.aaa};
+    private ArrayList<Integer> ImagesArray = new ArrayList<Integer>();
+
 
    // ArrayList<Integer> Section_ids = new ArrayList<Integer>();
     @Override
@@ -99,6 +114,12 @@ public class Discover extends Fragment implements View.OnClickListener {
         //// Check Network Availability
         is_wifi_availeable=Variables.is_internet_avail(getContext());
         Get_Sections_News();
+
+         //Variables.isRTL();
+
+         Variables.toast_msg(getContext(),""+Variables.isRTL());
+
+        //init_2();
         if(is_wifi_availeable==true){
             // ==> If wifi available
 
@@ -194,31 +215,50 @@ public class Discover extends Fragment implements View.OnClickListener {
 
                 User_info_json = SharedPrefrence.get_offline(getContext(),SharedPrefrence.shared_user_login_detail_key);
 
+               // Login_details bottomSheetFragment = new Login_details();
+                //bottomSheetFragment.show(getActivity().getSupportFragmentManager(), bottomSheetFragment.getTag());
+               // bottomSheetFragment.setPeekHeight(300);
+
                 if(User_info_json != null){
                     // If user Already Login    ==> :-)
 
                 //    layout_MainMenu.getForeground().setAlpha( 0); // restore
                   //  main_lauout.setVisibility(View.VISIBLE);
 
-                    Already_Login_f F = new Already_Login_f();
-                    FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                    transaction.setCustomAnimations(R.anim.bottom_to_top, 0);
-                    transaction.addToBackStack(null);
-                    transaction.replace(R.id.mainfragment_RL_id, F).commit();
+//                    BottomSheetDialog dialog = new BottomSheetDialog(getContext());
+//                    dialog.setContentView(view);
+//                    dialog.show();
+
+                    Already_Login_f sign_up = new Already_Login_f();
+                    sign_up.show(getActivity().getSupportFragmentManager(), sign_up.getTag());
+
+
+
+//                    Already_Login_f F = new Already_Login_f();
+//                    FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+//                    transaction.setCustomAnimations(R.anim.bottom_to_top, 0);
+//                    transaction.addToBackStack(null);
+//                    transaction.replace(R.id.mainfragment_RL_id, F).commit();
+
+
 
 
                 }else{
                     // If user is not Login  ==> :D
 
+                    Login_details sign_up = new Login_details();
+                    sign_up.show(getActivity().getSupportFragmentManager(), sign_up.getTag());
+
+
 //                    dim_area.setForeground(getResources().getDrawable(R.drawable.dim));
 ////                    dim_area.setAnimation((Animation) getResources().getAnimation(R.anim.bottom_to_top));
 //                    dim_area.getForeground().setAlpha(180);
                    // main_lauout.setVisibility(View.VISIBLE);
-                    Login_details F = new Login_details();
-                    FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                    transaction.setCustomAnimations(R.anim.bottom_to_top, 0);
-                    transaction.addToBackStack(null);
-                    transaction.replace(R.id.mainfragment_RL_id, F).commit();
+//                    Login_details F = new Login_details();
+//                    FragmentTransaction transaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+//                    transaction.setCustomAnimations(R.anim.bottom_to_top, 0);
+//                    transaction.addToBackStack(null);
+//                    transaction.replace(R.id.mainfragment_RL_id, F).commit();
 
                 }
 
@@ -307,13 +347,15 @@ public class Discover extends Fragment implements View.OnClickListener {
                           JSONObject News = news_obj.getJSONObject("News");
                           News.getString("title");
                           News.getInt("id");
-                         // News.getInt("favourite");
+                          News.getInt("favourite");
 //                          JSONObject category_obj = news_obj.getJSONObject("Category");
 //                          category_obj.getString("name");
                           Sliders_data_model a = new Sliders_data_model(
                                   News.getString("attachment")
                                   ,News.getString("title"),
-                                  News.getString("description")
+                                  News.getString("description"),
+                                  News.getInt("id"),
+                                  News.getInt("favourite")
                                   );
                           Slider_List.add(a);
                        }
@@ -494,7 +536,8 @@ public class Discover extends Fragment implements View.OnClickListener {
                                     // Add header only First item
                                     add = new NewsDataMode(
                                             News_Sections.getString("name")
-                                            ,section_news
+                                            ,section_news,
+                                            News_Sections.getInt("id")
                                     );
 
                         News_List.add(add);
@@ -630,6 +673,70 @@ public class Discover extends Fragment implements View.OnClickListener {
 
         }
     }
+
+
+//    private void init_2() {
+//        for(int i=0;i<IMAGES.length;i++)
+//            ImagesArray.add(IMAGES[i]);
+//
+//        mPager =  view.findViewById(R.id.pager);
+//
+//
+//        mPager.setAdapter(new SlidingImage_Adapter(getActivity(),ImagesArray));
+//
+//
+////        CirclePageIndicator indicator = (CirclePageIndicator)
+////                view.findViewById(R.id.indicator);
+////
+////        indicator.setViewPager(mPager);
+////
+////        final float density = getResources().getDisplayMetrics().density;
+////
+//////Set circle indicator radius
+////        indicator.setRadius(5 * density);
+//
+//        NUM_PAGES =IMAGES.length;
+//
+//        // Auto start of viewpager
+//        final Handler handler = new Handler();
+//        final Runnable Update = new Runnable() {
+//            public void run() {
+//                if (currentPage == NUM_PAGES) {
+//                    currentPage = 0;
+//                }
+//                mPager.setCurrentItem(currentPage++, true);
+//            }
+//        };
+//        Timer swipeTimer = new Timer();
+//        swipeTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                handler.post(Update);
+//            }
+//        }, 3000, 3000);
+//
+//        // Pager listener over indicator
+////        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+////
+////            @Override
+////            public void onPageSelected(int position) {
+////                currentPage = position;
+////
+////            }
+////
+////            @Override
+////            public void onPageScrolled(int pos, float arg1, int arg2) {
+////
+////            }
+////
+////            @Override
+////            public void onPageScrollStateChanged(int pos) {
+////
+////            }
+////        });
+//
+//    }
+//
 
 
 }

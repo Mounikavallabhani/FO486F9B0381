@@ -15,7 +15,7 @@ public class NewsDataMode {
     JSONArray news_array;
     String Section_title;
     ArrayList<String> News_title_list, News_img_url;
-
+    int news_section_id;
     public ArrayList<String> getNews_title_list() {
         return News_title_list;
     }
@@ -79,9 +79,18 @@ public class NewsDataMode {
         this.News_img_url= News_imag_url;
     }
 
-    public NewsDataMode(String Section_title, JSONArray array) {
+    public NewsDataMode(String Section_title, JSONArray array, int News_Section_id) {
         this.Section_title = Section_title;
         this.news_array= array;
+        this.news_section_id = News_Section_id;
+    }
+
+    public int getNews_section_id() {
+        return news_section_id;
+    }
+
+    public void setNews_section_id(int news_section_id) {
+        this.news_section_id = news_section_id;
     }
 
     public int getLike_dislile() {

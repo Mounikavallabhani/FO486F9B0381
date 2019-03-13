@@ -1,6 +1,7 @@
 package com.example.hani.social_app.TopNews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,10 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
 import com.example.hani.social_app.TopNews.DataModels.Sliders_data_model;
+import com.example.hani.social_app.TopNews.NewsDetail_f.NewsDetail_F;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -62,22 +66,23 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             viewHolder.imageView.setClipToOutline(true);
         }
 
-        Sliders_data_model News = News_List_adapter.get(i);
+        final Sliders_data_model News = News_List_adapter.get(i);
         Log.d("data",""+News.getImage_url());
 //        viewHolder.imageView.setBackgroundResource(R.drawable.aaa);
         int targetWidth = viewHolder.imageView.getWidth();
-//        Picasso.get()
-//                .load(News.getImage_url()).
-//        resize(300, 300)
-//                .placeholder(R.mipmap.ic_dnews)
-//                .error(R.mipmap.ic_dnews).
-//                into(viewHolder.imageView);
+
+        Picasso.get()
+                .load(News.getImage_url()).
+        resize(200, 250)
+                .placeholder(R.mipmap.ic_dnews)
+                .error(R.mipmap.ic_dnews).
+                into(viewHolder.imageView);
 
 
 
@@ -86,26 +91,43 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
 
 //        viewHolder.imageView.setImageResource(R.drawable.aaa);
 
-        Picasso.get().load(News.getImage_url()).error(R.mipmap.ic_dnews)
-                               .into(new Target(){
+//        Picasso.get().load(News.getImage_url()).error(R.mipmap.ic_dnews)
+//                               .into(new Target(){
+//
+//            @Override
+//            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                viewHolder.imageView.setBackground(new BitmapDrawable(context.getResources(), bitmap));
+//            }
+//
+//            @Override
+//            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+//
+//            }
+//
+//                        @Override
+//            public void onPrepareLoad(final Drawable placeHolderDrawable) {
+//                Log.d("TAG", "Prepare Load");
+//            }
+//        });
 
+       // viewHolder.card.setBackgroundResource(R.drawable.aaa);
+
+        viewHolder.title.setText(""+News.getTitle());
+
+        viewHolder.main.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                viewHolder.imageView.setBackground(new BitmapDrawable(context.getResources(), bitmap));
-            }
+            public void onClick(View view) {
+                //Toast.makeText(context, "Recycle Click " + i +" Like "+News.getIs_like_dis_like()+" ", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                Intent myIntent = new Intent(view.getContext(), NewsDetail_F.class);
+                myIntent.putExtra("news_id",  News.getNews_id());
+                myIntent.putExtra("like_or_dislike", News.getLike_dislike());
+                //Optional parameters
+                view.getContext().startActivity(myIntent);
 
-            }
-
-                        @Override
-            public void onPrepareLoad(final Drawable placeHolderDrawable) {
-                Log.d("TAG", "Prepare Load");
             }
         });
 
-        viewHolder.card.setBackgroundResource(R.drawable.aaa);
       // viewHolder.imageView.setImageResource(img[i]);
 
 //        Picasso.get()
@@ -127,6 +149,7 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
 
         ImageView imageView;
         LinearLayout main;
+        TextView title;
             CardView card;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -134,7 +157,7 @@ public class Discover_Adapter_one extends RecyclerView.Adapter<Discover_Adapter_
             imageView = (ImageView) itemView.findViewById(R.id.item_recyclerview_IV_id);
             main = itemView.findViewById(R.id.main);
             card = itemView.findViewById(R.id.item_recyclerview_CV_id);
-
+            title = itemView.findViewById(R.id.title);
         }
         public void onbind(final int pos, final Discover_Adapter_one.onClick listener){
 

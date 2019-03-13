@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "567696974975",
+    "firebase_url": "https://dnews-2aa39.firebaseio.com",
+    "project_id": "dnews-2aa39",
+    "storage_bucket": "dnews-2aa39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567696974975:android:6143c0128b1d3701",
+        "android_client_info": {
+          "package_name": "com.example.hani.social_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567696974975-phcpd20s43qtq9tsa0tp52rrvf9f84n1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hani.social_app",
+            "certificate_hash": "02e35ad95d3a584d993ff1b0ec6044cbb447e4ef"
+          }
+        },
+        {
+          "client_id": "567696974975-ka0884gsm8ak233kkmnqas7ut0t869e8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8reHUJEUdJ1ficDzQKo2Qyw3r9nnxVKw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567696974975-ka0884gsm8ak233kkmnqas7ut0t869e8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

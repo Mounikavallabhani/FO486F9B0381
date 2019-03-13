@@ -41,6 +41,8 @@ public class MainFragment extends Fragment {
 //        viewpageradapter.addfragment(new Search(), "");
         viewpageradapter.addfragment(new Saved(), "");
 
+        //pager.beginFakeDrag();
+
         pager.setAdapter(viewpageradapter);
         tabLayout.setupWithViewPager(pager);
 
@@ -73,8 +75,7 @@ public class MainFragment extends Fragment {
         textView4.setText("Saved");
         tabLayout.getTabAt(2).setCustomView(view4);
 
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
+               tabLayout.addOnTabSelectedListener(new TabLayout.BaseOnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 

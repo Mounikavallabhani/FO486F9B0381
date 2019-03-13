@@ -2,10 +2,14 @@ package com.example.hani.social_app.TopNews.LoginSignup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,8 +33,7 @@ public class Login extends AppCompatActivity {
 
     ImageView IV;
     TextView TV;
-    IResult mResultCallback = null;
-    VolleyService mVolleyService;
+
     private String TAG = "MainActivity";
     EditText EditEmail, EditPassword;
     String email, password;
@@ -38,6 +41,10 @@ public class Login extends AppCompatActivity {
     // Progress dialog
     private ProgressDialog pDialog;
     boolean is_wifi_availeable;
+    IResult mResultCallback = null;
+    VolleyService mVolleyService;
+    //defining AwesomeValidation object
+   // private AwesomeValidation awesomeValidation;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +63,21 @@ public class Login extends AppCompatActivity {
         EditEmail = findViewById(R.id.login_username_ET_id);
         EditPassword = findViewById(R.id.login_password_ET_id);
        // animationView = findViewById(R.id.btn_play_pause);
+
+
+        final View parent = (View) IV.getParent();  // button: the view you want to enlarge hit area
+        parent.post( new Runnable() {
+            public void run() {
+                final Rect rect = new Rect();
+                IV.getHitRect(rect);
+                rect.top -= 100;    // increase top hit area
+                rect.left -= 100;   // increase left hit area
+                rect.bottom += 100; // increase bottom hit area
+                rect.right += 100;  // increase right hit area
+                parent.setTouchDelegate( new TouchDelegate( rect , IV));
+            }
+        });
+
         IV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,12 +95,16 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void check(View v){
+      public void check(View v){
+
         if(EditEmail.getText().toString().trim().equalsIgnoreCase("")){
             EditEmail.setError(getResources().getString(R.string.email_set_errors));
         }else if(EditPassword.getText().toString().trim().equalsIgnoreCase("")){
             EditPassword.setError(getResources().getString(R.string.password_set_errors));
+                }else if(Variables.isEmailValid(EditEmail.getText().toString()) == false ){
+            EditEmail.setError(getResources().getString(R.string.email_validation_errors));
         }else{
+
             if(is_wifi_availeable==true){
                 // If internet Available
                 LogIn();
@@ -126,12 +152,24 @@ public class Login extends AppCompatActivity {
 
                 SharedPrefrence.save_response_share(Login.this,response.toString(),SharedPrefrence.shared_user_login_detail_key);
 
+                if(response.toString().contains("incorrect") || response.toString().contains("201") ){
+                    String title = "Info";
+                    String msg = "Invalid Credentials.";
+                    Variables.alert_dialogue(Login.this,""+title,""+msg);
 
-                Log.d(TAG, "Volley requester " + requestType);
-                Toast.makeText(Login.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Volley JSON post" + response);
 
-                finish();
+                }else{
+                    Log.d(TAG, "Volley requester " + requestType);
+                    Variables.toast_msg(Login.this,"Login Successfull.");
+                    Toast.makeText(Login.this, ""+response.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Volley JSON post" + response);
+
+                    finish();
+
+                }
+
+
+
 
             }
 

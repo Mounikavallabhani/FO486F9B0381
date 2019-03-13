@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hani.social_app.Category.Category_Wise_News.More_details;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
@@ -108,7 +110,7 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
         // End New Code
         News_section_List = new ArrayList<>();
 
-        Variables.Log_d_msg(viewGroup.getContext(),"Size in 2nd Adapter "+News_List_adapter.size());
+       // Variables.Log_d_msg(viewGroup.getContext(),"Size in 2nd Adapter "+News_List_adapter.size());
         v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.discover_item_2,null);
         return new ViewHolder(v);
 
@@ -135,6 +137,26 @@ public class Discover_Adapter_two extends RecyclerView.Adapter<Discover_Adapter_
 
         final NewsDataMode News = News_List_adapter.get(i);
         viewHolder.sectionLabel.setText(News.getSection_title());
+
+        // Select See All
+        viewHolder.showAllButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+         Toast.makeText(context, "You clicked on See All : " + News.getNews_section_id(), Toast.LENGTH_SHORT).show();
+            // ==> Open News List
+                Intent myIntent = new Intent(context, More_details.class);
+                myIntent.putExtra("cat_id",   News.getNews_section_id());
+                myIntent.putExtra("cate_name",  News.getSection_title());
+                myIntent.putExtra("is_section",  "1");
+                //Optional parameters
+                context.startActivity(myIntent);
+                /// => End News List
+
+            }
+        });
+        // End Select See All
+
+
         JSONArray get_news= News.getNews_array();
 
         try{

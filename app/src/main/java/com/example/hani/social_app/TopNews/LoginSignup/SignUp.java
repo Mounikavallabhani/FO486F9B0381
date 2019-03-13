@@ -1,9 +1,11 @@
 package com.example.hani.social_app.TopNews.LoginSignup;
 
 import android.app.ProgressDialog;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,6 +21,9 @@ import com.example.hani.social_app.VolleyReq.VolleyService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUp extends AppCompatActivity {
     ImageView IV;
@@ -52,6 +57,20 @@ public class SignUp extends AppCompatActivity {
         edit_first_name = findViewById(R.id.login_first_name_ET_id);
         edit_last_name = findViewById(R.id.login_last_name_ET_id);
 
+        final View parent = (View) IV.getParent();  // button: the view you want to enlarge hit area
+        parent.post( new Runnable() {
+            public void run() {
+                final Rect rect = new Rect();
+                IV.getHitRect(rect);
+                rect.top -= 100;    // increase top hit area
+                rect.left -= 100;   // increase left hit area
+                rect.bottom += 100; // increase bottom hit area
+                rect.right += 100;  // increase right hit area
+                parent.setTouchDelegate( new TouchDelegate( rect , IV));
+            }
+        });
+
+
         // animationView = findViewById(R.id.btn_play_pause);
         IV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +79,9 @@ public class SignUp extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     public void signup_check(View v){
         if(edit_email.getText().toString().trim().equalsIgnoreCase("")){
@@ -70,6 +92,8 @@ public class SignUp extends AppCompatActivity {
             edit_first_name.setError(getResources().getString(R.string.password_set_errors));
         }else if(edit_last_name.getText().toString().trim().equalsIgnoreCase("")){
             edit_last_name.setError(getResources().getString(R.string.password_set_errors));
+        }else if(Variables.isEmailValid(edit_email.getText().toString()) == false ){
+            edit_email.setError(getResources().getString(R.string.email_validation_errors));
         }
         else{
             if(is_wifi_availeable==true){

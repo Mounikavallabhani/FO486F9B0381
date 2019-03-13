@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hani.social_app.Category.CategoryModel.CategoryModel;
+import com.example.hani.social_app.Category.Category_Wise_News.More_details;
 import com.example.hani.social_app.CodeClasses.Variables;
 import com.example.hani.social_app.R;
 import com.example.hani.social_app.TopNews.DataModels.NewsDataMode;
@@ -142,9 +143,10 @@ public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             public void onClick(View view) {
                 Toast.makeText(context, "Recycle Click " + i+" Like "+cate.getName()+" ", Toast.LENGTH_SHORT).show();
 
-                Intent myIntent = new Intent(view.getContext(), CategoryDetailActivity.class);
-                myIntent.putExtra("category_name",  cate.getName());
-                myIntent.putExtra("category_img_url", Variables.BASEURL + cate.getImage_url());
+                Intent myIntent = new Intent(view.getContext(), More_details.class);
+                myIntent.putExtra("cat_id",  cate.getCate_id());
+                myIntent.putExtra("cate_name",  cate.getName());
+                myIntent.putExtra("is_section",  "0");
                 //Optional parameters
                 view.getContext().startActivity(myIntent);
 

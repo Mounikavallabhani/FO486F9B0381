@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        >
+
+        <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_recyclerview_2_RKR1_id"
+            app:corner_radius="3dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/item_recyclerview_2_TV1_id"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                />
+
+
+        </com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_recyclerview_2_TV_id"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_toLeftOf="@+id/item_recyclerview_2_IV_id"
+            android:paddingRight="10dp"
+            android:layout_below="@+id/item_recyclerview_2_RKR1_id"
+            android:paddingTop="5dp"
+            />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:id="@+id/item_recyclerview_2_IV_id"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/image_round_corner"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

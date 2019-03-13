@@ -6,14 +6,20 @@
     <string name="save_article_search" translatable="false">Search Articles</string>
     <string name="loading_text" translatable="false">Please wait..</string>
     <string name="email_set_errors" translatable="false">Email cant be empty.</string>
+    <string name="email_validation_errors" translatable="false">Email must be in correct format.</string>
     <string name="password_set_errors" translatable="false">Password cant be empty.</string>
     <string name="login" translatable="false">Log in to dnews</string>
     <string name="signup" translatable="false">Sign up to dnews</string>
     <string name="forgot_password" translatable="false">Forgot password? </string>
+    <string name="no_record_found" translatable="false">Sorry, No Record Found.  </string>
     <!--Signup String is here-->
 
     <string name="first_name" translatable="false">First Name</string>
     <string name="last_name" translatable="false">Last Name</string>
     <string name="email" translatable="false">Email</string>
     <string name="password" translatable="false">Password</string>
+
+    <string name="facebook_app_id" translatable="false">255217535385737</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb255217535385737</string>
+
 </resources>
