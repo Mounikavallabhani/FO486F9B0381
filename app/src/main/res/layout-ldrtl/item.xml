@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -95,10 +95,25 @@
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
-    
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:layout_below="@+id/item_TB_id"
         android:layout_above="@+id/item_bottom_RL_id"
         android:scrollbars="none"
@@ -185,6 +200,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Teen model Thylane Blondeau reportedly paid homage to decades past with her outfit choice earlier this week. \n  \nThe 17-year-old, once labeled the “Most Beautiful Girl in the World” as a young child, donned a short, black dress on Monday that appeared to be a throwback to fashion styles during the 1980s, according to news.com.au on Friday."
                 android:textSize="18dp"
+                android:layout_marginBottom="10dp"
                 android:lineSpacingExtra="2dp"
                 />
 
@@ -219,10 +235,11 @@
             android:layout_height="32dp"
             android:id="@+id/item_bottom_RL_like_IV_id"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/item_bottom_RL_download_IV_id"
+            android:layout_toLeftOf="@+id/item_bottom_RL_download_IV_id"
             android:layout_marginLeft="15dp"
             android:onClick="like_button"
             android:visibility="gone"
+            android:padding="2dp"
             android:src="@drawable/ic_like"
             />
 
@@ -231,15 +248,18 @@
             android:layout_height="32dp"
             android:id="@+id/item_bottom_RL_dislike_IV_id"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/item_bottom_RL_like_IV_id"
+            android:layout_toLeftOf="@+id/item_bottom_RL_like_IV_id"
             android:layout_marginLeft="15dp"
             android:onClick="DisLike_News"
             android:visibility="gone"
+            android:padding="2dp"
+
             android:src="@drawable/liked"
             />
 
         <RelativeLayout
             android:layout_width="wrap_content"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

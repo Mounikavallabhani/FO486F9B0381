@@ -12,8 +12,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/item_recyclerview_CV_id"
                 app:cardElevation="4dp"
-                app:cardCornerRadius="4dp"
-                app:cardBackgroundColor="@android:color/transparent"               >
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -22,7 +21,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="240dp"
                         android:scaleType="fitXY"
                         android:adjustViewBounds="true"
                         android:id="@+id/item_recyclerview_IV_id"
@@ -31,11 +30,25 @@
                     <TextView
                         android:layout_width="350dp"
                         android:layout_height="wrap_content"
-                        android:textSize="26dp"
-                        android:layout_margin="10dp"
+                        android:textSize="14sp"
+
+                        android:layout_marginLeft="20dp"
+                        android:textColor="@color/blue"
+                        android:text="Title"
+                        android:layout_marginTop="0dp"
+                        android:id="@+id/cate_name"
+                        />
+
+                    <TextView
+                        android:layout_width="350dp"
+                        android:layout_height="100dp"
+                        android:textSize="16sp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="20dp"
                         android:textColor="#000"
                         android:text="Title"
-                        android:textStyle="bold"
+
+
                         android:id="@+id/title"
                         />
 

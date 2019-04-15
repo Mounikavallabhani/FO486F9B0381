@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/item_TB_title_id"
                 android:text="dnews"
-                android:textSize="26dp"
+                android:textSize="23sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:layout_centerVertical="true"

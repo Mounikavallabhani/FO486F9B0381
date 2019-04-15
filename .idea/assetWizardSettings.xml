@@ -70,6 +70,14 @@
                                       </entry>
                                     </map>
                                   </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundLayerName" value="ic" />
+                                      <entry key="foregroundImage" value="C:\Users\Dinosoft Labs\Downloads\512.png" />
+                                      <entry key="foregroundLayerName" value="ic_dnews_ok" />
+                                      <entry key="outputName" value="ic_dnews_2" />
+                                    </map>
+                                  </option>
                                 </PersistentState>
                               </value>
                             </entry>
@@ -115,11 +123,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

@@ -6,12 +6,19 @@
     <string name="save_article_search" translatable="false">Search Articles</string>
     <string name="loading_text" translatable="false">Please wait..</string>
     <string name="email_set_errors" translatable="false">Email cant be empty.</string>
+    <string name="first_name_set_errors" translatable="false">First Name cant be empty.</string>
+    <string name="last_name_set_errors" translatable="false">Last Name cant be empty.</string>
     <string name="email_validation_errors" translatable="false">Email must be in correct format.</string>
     <string name="password_set_errors" translatable="false">Password cant be empty.</string>
     <string name="login" translatable="false">Log in to dnews</string>
     <string name="signup" translatable="false">Sign up to dnews</string>
     <string name="forgot_password" translatable="false">Forgot password? </string>
     <string name="no_record_found" translatable="false">Sorry, No Record Found.  </string>
+    <string name="info" translatable="false">Info</string>
+    <string name="wifi_connected_info" translatable="false">You are not connected to internet.Please turn on internet and try again later. Thanks.</string>
+    <string name="not_login" translatable="false">You are not logged in. First logged in then you can add to Favourite News.</string>
+    <string name="connection_failed" translatable="false">Sorry! Connection Failed.</string>
+
     <!--Signup String is here-->
 
     <string name="first_name" translatable="false">First Name</string>
@@ -19,7 +26,22 @@
     <string name="email" translatable="false">Email</string>
     <string name="password" translatable="false">Password</string>
 
-    <string name="facebook_app_id" translatable="false">255217535385737</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb255217535385737</string>
+    <!--Here is Facebook ID-->
+
+    <string name="facebook_app_id" translatable="false"> Here is Facebook ID </string>
+    <string name="fb_login_protocol_scheme" translatable="false"> FB id with prefix fb e.g fb12323443 </string>
+
+    <!--FB id with prefix fb e.g fb12323443-->
+
+    <!--Admob Ad Ids-->
+    <!--These Ads ids are Demo Ids-->
+    <string name="interstacioys_ad_id" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!--Run time permissions String-->
+
+    <string name = "per_title" translatable = "false">Permissions</string>
+    <string name = "per_info" translatable = "false">You denied permissions. Please accept permission. Thanks.</string>
+
 
 </resources>

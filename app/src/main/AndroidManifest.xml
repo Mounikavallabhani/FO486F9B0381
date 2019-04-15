@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hani.social_app">
+    package="com.dinosoftlabs.dnews.social_app">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_dnews"
+        android:icon="@mipmap/ic_dnews_ok"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+
         android:theme="@style/AppTheme">
+
+        <service android:name="com.dinosoftlabs.dnews.FireBase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/interstacioys_ad_id"/>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
@@ -30,26 +42,26 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Category.CategoryDetailActivity"></activity>
-        <activity android:name=".TopNews.LoginSignup.SignUp"
+        <activity android:name="com.dinosoftlabs.dnews.Category.CategoryDetailActivity"></activity>
+        <activity android:name="com.dinosoftlabs.dnews.TopNews.LoginSignup.SignUp"
             android:windowSoftInputMode="stateVisible|adjustResize"
             />
-        <activity android:name=".Splashscreen">
+        <activity android:name="com.dinosoftlabs.dnews.Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".TopNews.NewsDetail_f.NewsDetail_F" />
-        <activity android:name=".TopNews.LoginSignup.Login"
+        <activity android:name="com.dinosoftlabs.dnews.MainActivity" />
+        <activity android:name="com.dinosoftlabs.dnews.TopNews.NewsDetail_f.NewsDetail_F" />
+        <activity android:name="com.dinosoftlabs.dnews.TopNews.LoginSignup.Login"
             android:windowSoftInputMode="stateVisible|adjustResize"
             />
-        <activity android:name=".TopNews.LoginSignup.ForgotPassword"
+        <activity android:name="com.dinosoftlabs.dnews.TopNews.LoginSignup.ForgotPassword"
             android:windowSoftInputMode="stateVisible|adjustResize"
             />
-        <activity android:name=".Category.Category_Wise_News.More_details" />
+        <activity android:name="com.dinosoftlabs.dnews.Category.Category_Wise_News.More_details" />
     </application>
 
 </manifest>

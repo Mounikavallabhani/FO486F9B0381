@@ -1,52 +1,41 @@
 {
   "project_info": {
-    "project_number": "567696974975",
-    "firebase_url": "https://dnews-2aa39.firebaseio.com",
-    "project_id": "dnews-2aa39",
-    "storage_bucket": "dnews-2aa39.appspot.com"
+    "project_number": "1084108717240",
+    "firebase_url": "https://dnewsnew-da040.firebaseio.com",
+    "project_id": "dnewsnew-da040",
+    "storage_bucket": "dnewsnew-da040.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:567696974975:android:6143c0128b1d3701",
+        "mobilesdk_app_id": "1:1084108717240:android:42438e81b69e0ff8",
         "android_client_info": {
-          "package_name": "com.example.hani.social_app"
+          "package_name": "com.dinosoftlabs.dnews"
         }
       },
       "oauth_client": [
         {
-          "client_id": "567696974975-phcpd20s43qtq9tsa0tp52rrvf9f84n1.apps.googleusercontent.com",
+          "client_id": "1084108717240-31r3t8h18ioq7q9b7lnrrrqsqlkfam9a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.hani.social_app",
+            "package_name": "com.dinosoftlabs.dnews",
             "certificate_hash": "02e35ad95d3a584d993ff1b0ec6044cbb447e4ef"
           }
-        },
-        {
-          "client_id": "567696974975-ka0884gsm8ak233kkmnqas7ut0t869e8.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD8reHUJEUdJ1ficDzQKo2Qyw3r9nnxVKw"
+          "current_key": "AIzaSyChUYyi3lGXj7Kuz_HXd0BerWksd5T25BU"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "567696974975-ka0884gsm8ak233kkmnqas7ut0t869e8.apps.googleusercontent.com",
+              "client_id": "1084108717240-po6tsnm23tcrjqocc689r6okjkj2qi8v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

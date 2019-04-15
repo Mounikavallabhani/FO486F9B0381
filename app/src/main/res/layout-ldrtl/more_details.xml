@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Category.Category_Wise_News.More_details">
+    tools:context="com.dinosoftlabs.dnews.Category.Category_Wise_News.More_details">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
@@ -31,9 +31,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/More_details_TV_id"
                 android:text="Category"
-                android:textSize="26dp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
+
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 />

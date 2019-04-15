@@ -2,6 +2,7 @@
 <!--suppress ALL -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,13 +15,15 @@
         <com.jcminarro.roundkornerlayout.RoundKornerRelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:id="@+id/item_recyclerview_2_RKR1_id"
             app:corner_radius="3dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Usama"
+
                 android:id="@+id/item_recyclerview_2_TV1_id"
                 android:paddingLeft="4dp"
                 android:paddingRight="4dp"
@@ -37,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/item_recyclerview_2_TV_id"
             android:textSize="16dp"
-            android:textStyle="bold"
+
             android:textColor="@color/black"
             android:layout_toLeftOf="@+id/item_recyclerview_2_IV_id"
             android:paddingRight="10dp"

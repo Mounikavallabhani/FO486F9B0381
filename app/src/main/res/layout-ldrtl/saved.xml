@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/pullToRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SavedArticles.Saved">
+    tools:context="com.dinosoftlabs.dnews.SavedArticles.Saved">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,4 +77,16 @@
         </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:visibility="gone"
+        android:id="@+id/no_record"
+        android:text="@string/no_record_found"
+        android:layout_centerInParent="true"
+        />
+
 </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -2,6 +2,7 @@
 <!--suppress ALL -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -37,7 +38,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/item_recyclerview_2_TV_id"
             android:textSize="16dp"
-            android:textStyle="bold"
+
             android:textColor="@color/black"
             android:layout_toLeftOf="@+id/item_recyclerview_2_IV_id"
             android:paddingRight="10dp"

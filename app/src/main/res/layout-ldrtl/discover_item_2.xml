@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/main"
     android:padding="5dp">
 
     <TextView
@@ -28,7 +29,7 @@
         android:paddingTop="8dp"
         android:text="See All"
         android:textAllCaps="true"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
 
     <!--  recycler view for items -->
@@ -37,5 +38,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/section_show_all_button"
-        android:layout_marginTop="7dp" />
+         />
 </RelativeLayout>
